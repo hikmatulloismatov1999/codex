@@ -1,7 +1,8 @@
-# Almost Continuity and the Kolmogorov--Riesz Theorem
+# Almost Equicontinuity Implies the Translation Condition
 
-This folder contains a LaTeX paper draft about almost continuity, the
-translation condition, and the Kolmogorov--Riesz compactness theorem.
+This folder contains a LaTeX note proving that classical almost
+equicontinuity, together with finite-measure support, implies the truncated
+translation condition.
 
 ## Files
 
@@ -24,4 +25,3 @@ or directly:
 pdflatex main.tex
 pdflatex main.tex
 ```
-

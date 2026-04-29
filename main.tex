@@ -1,156 +1,204 @@
-\documentclass[11pt]{amsart}
+\documentclass[11pt]{article}
 
-\usepackage{amsmath, amssymb, amsthm}
-\usepackage{mathrsfs}
-\usepackage{hyperref}
-\usepackage{cleveref}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\geometry{margin=1in}
 
-%---------- THEOREM ENVIRONMENTS ----------
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
 
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{example}[theorem]{Example}
-
-%---------- TITLE ----------
-\title{On the Structure and Compactness Properties of Asymptotic $L^p$ Spaces}
-
+\title{Almost Equicontinuity Implies the Translation Condition}
 \author{Hikmatullo Ismatov}
-\address{King Abdullah University of Science and Technology (KAUST)}
-\email{your@email.com}
+\date{}
 
-%---------- ABSTRACT ----------
 \begin{document}
-
-\begin{abstract}
-We study asymptotic $L^p$ spaces, recently introduced by Alves, which provide a natural framework for analyzing measurable functions on infinite measure spaces. These spaces interpolate between classical $L^p$ spaces and convergence in measure, and are equipped with a nonlocally convex $F$-norm structure.
-
-In this work, we investigate structural and compactness properties of asymptotic $L^p$ spaces. We establish embedding results, develop compactness criteria extending the Kolmogorov--Riesz theorem, and provide new formulations in terms of almost equicontinuity and tail control. Our results contribute to the development of a function space theory adapted to truncated $L^p$ structures.
-\end{abstract}
 
 \maketitle
 
-%---------- INTRODUCTION ----------
-\section{Introduction}
+\section{Definition and statement}
 
-Classical $L^p$ spaces play a central role in analysis; however, on infinite measure spaces they often impose overly restrictive conditions, while convergence in measure lacks sufficient structure for many analytical purposes. To address this gap, Alves introduced the notion of asymptotic $L^p$ convergence, which combines features of both $L^p$ convergence and convergence in measure.
-
-More precisely, this convergence can be characterized by the truncated functional
+Throughout, $m$ denotes Lebesgue measure on $\mathbb{R}^n$, and all functions
+are Lebesgue measurable. If $A\subset \mathbb{R}^n$ and
+$y\in\mathbb{R}^n$, we write
 \[
-\int_X \min(|f|,1)^p \, d\mu,
+    A-y := \{x\in\mathbb{R}^n : x+y\in A\}.
 \]
-which induces an $F$-norm topology on the space of measurable functions. This framework has been further developed in recent works, where compactness criteria and structural properties have been established.
+Thus $A-y$ is measurable whenever $A$ is measurable, and
+$m(A-y)=m(A)$ by translation invariance of Lebesgue measure.
 
-The aim of this paper is to further develop the functional analytic theory of asymptotic $L^p$ spaces. Our main contributions are as follows:
-
-\begin{itemize}
-\item We establish embedding results connecting Sobolev-type spaces and asymptotic $L^p$ spaces.
-\item We prove compactness criteria extending the Kolmogorov--Riesz theorem in this setting.
-\item We provide alternative formulations of compactness in terms of almost equicontinuity and tail control.
-\end{itemize}
-
-These results contribute to the understanding of asymptotic $L^p$ spaces as a natural intermediate framework between $L^p$ theory and measure-theoretic convergence.
-
-%---------- PRELIMINARIES ----------
-\section{Preliminaries}
-
-Let $(X,\mathcal{A},\mu)$ be a measure space.
-
-\begin{definition}
-For $1 \le p < \infty$, the asymptotic $L^p$ functional is defined by
+\begin{definition}[Classical almost equicontinuity]\label{def:ae}
+Let $\mathcal{F}$ be a family of real-valued measurable functions on
+$\mathbb{R}^n$. We say that $\mathcal{F}$ is \emph{almost equicontinuous} if
+for every $\gamma>0$ there exists a measurable set
+$B_\gamma\subset\mathbb{R}^n$ with
 \[
-\|f\|_{\alpha_p}
-:=
-\left(
-\int_X \min(|f(x)|,1)^p \, d\mu(x)
-\right)^{1/p}.
+    m(B_\gamma)<\gamma
 \]
+such that $\mathcal{F}$ is equicontinuous on
+$\mathbb{R}^n\setminus B_\gamma$. Equivalently, for every $\eta>0$ there
+exists $\rho>0$ such that
+\[
+    x_1,x_2\in \mathbb{R}^n\setminus B_\gamma,\quad |x_1-x_2|<\rho
+    \quad\Longrightarrow\quad
+    |f(x_1)-f(x_2)|<\eta
+\]
+for every $f\in\mathcal{F}$.
 \end{definition}
 
-\begin{definition}
-A sequence $(f_n)$ converges asymptotically in $L^p$ to $f$ if
+\begin{theorem}\label{thm:main}
+Let $E\subset\mathbb{R}^n$ be measurable with $m(E)<\infty$, and let
+$\mathcal{F}$ be a family of real-valued measurable functions on
+$\mathbb{R}^n$. Assume that:
+\begin{enumerate}
+    \item[\textup{(H1)}] $f(x)=0$ for every $x\notin E$ and every
+    $f\in\mathcal{F}$;
+    \item[\textup{(H2)}] $\mathcal{F}$ is almost equicontinuous in the sense of
+    Definition~\ref{def:ae}.
+\end{enumerate}
+Then
 \[
-\|f_n - f\|_{\alpha_p} \to 0.
+    \lim_{|y|\to 0}\;\sup_{f\in\mathcal{F}}
+    \int_{\mathbb{R}^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx = 0.
 \]
-\end{definition}
-
-We recall the following characterization.
-
-\begin{proposition}
-A sequence $(f_n)$ converges asymptotically in $L^p$ to $f$ if and only if
+Equivalently, for every $\varepsilon>0$ there exists $r>0$ such that, whenever
+$|y|<r$,
 \[
-\int_X \min(|f_n - f|,1)^p \, d\mu \to 0.
+    \sup_{f\in\mathcal{F}}
+    \int_{\mathbb{R}^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx
+    <\varepsilon.
 \]
-\end{proposition}
+\end{theorem}
 
-%---------- BASIC PROPERTIES ----------
-\section{Basic Properties of the $\alpha_p$-Functional}
-
-\begin{proposition}
-The functional $\|\cdot\|_{\alpha_p}$ defines an $F$-norm on the space of measurable functions.
-\end{proposition}
+\section{Proof}
 
 \begin{proof}
-[Sketch] The proof follows from the truncation structure of the integrand and standard properties of measurable functions.
+For $f\in\mathcal{F}$ and $y\in\mathbb{R}^n$, set
+\[
+    I(f,y):=
+    \int_{\mathbb{R}^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx .
+\]
+We prove that $I(f,y)$ is small uniformly in $f$ when $|y|$ is small.
+
+If $m(E)=0$, then by (H1) each $f\in\mathcal{F}$ is zero almost everywhere.
+By translation invariance, $f(\cdot+y)$ is also zero almost everywhere, and
+hence $I(f,y)=0$ for all $f$ and $y$. Thus the conclusion is immediate. We may
+therefore assume that $0<m(E)<\infty$.
+
+Fix $\varepsilon>0$. Choose
+\[
+    \gamma:=\frac{\varepsilon}{8},
+    \qquad
+    \eta:=\frac{\varepsilon}{8\,m(E)}.
+\]
+By almost equicontinuity, there exists a measurable set
+$B:=B_\gamma\subset\mathbb{R}^n$ such that
+\[
+    m(B)<\gamma
+\]
+and such that $\mathcal{F}$ is equicontinuous on
+$\mathbb{R}^n\setminus B$. Applying this equicontinuity with the above
+$\eta$, we obtain $\rho>0$ such that, for all $f\in\mathcal{F}$,
+\[
+    x_1,x_2\in\mathbb{R}^n\setminus B,\quad |x_1-x_2|<\rho
+    \quad\Longrightarrow\quad
+    |f(x_1)-f(x_2)|<\eta .
+\]
+Set $r:=\rho$, and fix $y\in\mathbb{R}^n$ with $|y|<r$.
+
+For every $f\in\mathcal{F}$, the integrand in $I(f,y)$ vanishes outside
+$E\cup(E-y)$. Indeed, if $x\notin E\cup(E-y)$, then $x\notin E$ and
+$x+y\notin E$, so (H1) gives $f(x)=f(x+y)=0$. Hence
+\[
+    I(f,y)=
+    \int_{E\cup(E-y)}
+    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx .
+\]
+Moreover,
+\[
+    m(E\cup(E-y))\le m(E)+m(E-y)=2m(E).
+\]
+
+Define the bad set associated with the translation $y$ by
+\[
+    \operatorname{Bad}(y):=B\cup(B-y),
+\]
+and define the good set by
+\[
+    G(y):=(E\cup(E-y))\setminus \operatorname{Bad}(y).
+\]
+Since $m(B-y)=m(B)$, we have
+\[
+    m(\operatorname{Bad}(y))
+    \le m(B)+m(B-y)
+    =2m(B)
+    <2\gamma .
+\]
+
+If $x\in G(y)$, then $x\notin B$ and $x\notin B-y$, hence
+$x+y\notin B$. Since $|x-(x+y)|=|y|<\rho$, the equicontinuity estimate gives
+\[
+    |f(x+y)-f(x)|<\eta
+\]
+for every $f\in\mathcal{F}$. Therefore
+\[
+\begin{aligned}
+    \int_{G(y)}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx
+    &\le \eta\,m(G(y)) \\
+    &\le \eta\,m(E\cup(E-y)) \\
+    &\le 2\eta\,m(E)
+     = \frac{\varepsilon}{4}.
+\end{aligned}
+\]
+On the bad part, we use only the truncation bound $\min(a,1)\le 1$:
+\[
+\begin{aligned}
+    \int_{(E\cup(E-y))\cap\operatorname{Bad}(y)}
+    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx
+    &\le m(\operatorname{Bad}(y))  \\
+    &<2\gamma
+     =\frac{\varepsilon}{4}.
+\end{aligned}
+\]
+Combining the good and bad estimates, we get
+\[
+    I(f,y)<\frac{\varepsilon}{2}
+\]
+for every $f\in\mathcal{F}$ and every $|y|<r$. Taking the supremum over
+$f\in\mathcal{F}$ yields
+\[
+    \sup_{f\in\mathcal{F}} I(f,y)
+    \le \frac{\varepsilon}{2}
+    <\varepsilon
+    \qquad (|y|<r).
+\]
+Since $\varepsilon>0$ was arbitrary, the desired translation condition follows.
 \end{proof}
 
-%---------- EMBEDDING ----------
-\section{Embedding Results}
+\section{Remarks}
 
-\begin{theorem}
-Let $u \in L^p(\mathbb{R}^n)$. Then $u \in \Lambda_p(\mathbb{R}^n)$ and
+\begin{remark}
+The proof uses the classical definition of almost equicontinuity: after removing
+one set of arbitrarily small measure, the whole family is equicontinuous on the
+remaining set. The numbers $\gamma$ and $\eta$ in the proof have different
+roles: $\gamma$ controls the size of the exceptional set, while $\eta$ is the
+ordinary tolerance in the equicontinuity estimate. This is not a new definition,
+only an unpacking of the usual one.
+\end{remark}
+
+\begin{remark}
+The truncation $\min(\cdot,1)$ is essential for this argument. On the bad set we
+do not assume any uniform $L^p$ bound or uniform boundedness of the functions;
+the estimate is possible only because the integrand is bounded by $1$.
+\end{remark}
+
+\begin{remark}
+The assumption $m(E)<\infty$ is used to control the good part of the integral by
 \[
-\|u\|_{\alpha_p} \le \|u\|_{L^p}.
+    \eta\,m(E\cup(E-y))\le 2\eta\,m(E).
 \]
-\end{theorem}
-
-%---------- COMPACTNESS ----------
-\section{Compactness in Asymptotic $L^p$ Spaces}
-
-\begin{definition}
-A family $\mathcal{F}$ is almost equibounded if for every $\varepsilon>0$ there exists $M>0$ such that
-\[
-\sup_{f \in \mathcal{F}} \mu(\{|f|>M\}) < \varepsilon.
-\]
-\end{definition}
-
-\begin{theorem}
-Let $\mathcal{F} \subset \Lambda_p(\mathbb{R}^n)$. Suppose:
-\begin{enumerate}
-\item $\mathcal{F}$ is almost equibounded,
-\item $\mathcal{F}$ satisfies a uniform tail condition,
-\item $\mathcal{F}$ satisfies a translation continuity condition.
-\end{enumerate}
-Then $\mathcal{F}$ is relatively compact in $\Lambda_p$.
-\end{theorem}
-
-%---------- FURTHER RESULTS ----------
-\section{Further Results}
-
-We discuss refinements of the compactness criterion and possible formulations in terms of almost equicontinuity.
-
-%---------- REFERENCES ----------
-\begin{thebibliography}{9}
-
-\bibitem{Alves2024}
-N. J. Alves,
-\emph{On $F$-spaces of almost-Lebesgue functions},
-arXiv:2410.22905.
-
-\bibitem{AlvesOniani2024}
-N. J. Alves and E. Oniani,
-\emph{Asymptotic $L_p$ convergence and related topics},
-arXiv:2407.06830.
-
-\bibitem{Alves2025}
-N. J. Alves,
-\emph{A Kolmogorov--Riesz compactness theorem in asymptotic $L_p(\mathbb{R}^n)$},
-arXiv:2507.15102.
-
-\end{thebibliography}
+Without finite measure support, this estimate gives no information.
+\end{remark}
 
 \end{document}
