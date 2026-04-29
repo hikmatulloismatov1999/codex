@@ -1,8 +1,8 @@
-# Almost Equicontinuity Implies the Translation Condition
+# Almost Equicontinuity and Translation Conditions
 
-This folder contains a LaTeX note proving that classical almost
-equicontinuity, together with finite-measure support, implies the truncated
-translation condition.
+This folder contains a LaTeX paper draft about almost equicontinuity,
+truncated translation conditions, and compactness in asymptotic \(L^p\)
+spaces.
 
 ## Files
 
