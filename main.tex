@@ -1,0 +1,300 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\DeclareMathOperator{\supp}{supp}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Lp}{L^p}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+
+\title{Almost Continuity and the Translation Condition in the Kolmogorov--Riesz Theorem}
+\author{Ismatoh}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+The Kolmogorov--Riesz compactness theorem characterizes relatively compact
+families in $\Lp(\R^n)$ by three conditions: boundedness, tightness, and
+uniform control of translations. This paper explains the translation condition
+as a form of almost continuity for a family of functions. After presenting the
+theorem, we show how almost continuity enters the proof through mollification
+and finite-dimensional approximation on compact sets. The main point is that
+translation control converts weak information about size and support into
+strong compactness in the $\Lp$ norm.
+\end{abstract}
+
+\section{Introduction}
+
+Compactness is one of the central tools in analysis. It allows one to pass from
+approximating sequences to actual limiting objects, and it is especially useful
+when direct formulas for limits are unavailable. In spaces of continuous
+functions, the Arzela--Ascoli theorem gives a familiar compactness principle:
+uniform boundedness and equicontinuity imply compactness on compact domains.
+
+For $\Lp$ spaces the situation is subtler. Functions in $\Lp$ are equivalence
+classes, so pointwise continuity is not the natural language. Instead,
+continuity is measured by translations in norm. If small shifts of every
+function in a family are small uniformly in $\Lp$, then the family behaves like
+an equicontinuous family after ignoring pointwise representatives. This is the
+``almost continuity'' behind the Kolmogorov--Riesz theorem.
+
+The purpose of this paper is to make that idea precise. We state the theorem in
+$\Lp(\R^n)$, explain the translation condition, and outline how it is used to
+prove relative compactness. The proof shows that boundedness controls vertical
+size, tightness prevents mass from escaping to infinity, and almost continuity
+allows approximation by smooth functions on compact sets.
+
+\section{Preliminaries}
+
+Let $1 \leq p < \infty$ and let $\mathcal{F}\subset \Lp(\R^n)$. For
+$h\in\R^n$, define the translation operator
+\[
+  \tau_h f(x)=f(x+h).
+\]
+Translations are isometries on $\Lp(\R^n)$:
+\[
+  \norm{\tau_h f}_{p}=\norm{f}_{p}.
+\]
+For each fixed $f\in \Lp(\R^n)$, it is standard that
+\[
+  \lim_{h\to 0}\norm{\tau_h f-f}_{p}=0.
+\]
+The compactness theorem requires this convergence to be uniform for a whole
+family.
+
+\begin{definition}[Uniform almost continuity]
+Let $1\leq p<\infty$. A family $\mathcal{F}\subset \Lp(\R^n)$ is uniformly
+almost continuous if
+\[
+  \lim_{h\to 0}\sup_{f\in\mathcal{F}}\norm{\tau_h f-f}_{p}=0.
+\]
+\end{definition}
+
+This definition is also called uniform translation continuity. It is analogous
+to equicontinuity in the Arzela--Ascoli theorem, but it uses the $\Lp$ norm
+instead of pointwise distances.
+
+\begin{definition}[Tightness]
+A family $\mathcal{F}\subset \Lp(\R^n)$ is tight if for every $\varepsilon>0$
+there exists $R>0$ such that
+\[
+  \int_{\abs{x}>R}\abs{f(x)}^p\,dx < \varepsilon^p
+  \quad\text{for every }f\in\mathcal{F}.
+\]
+\end{definition}
+
+Tightness rules out the possibility that a sequence moves its mass farther and
+farther away. For example, $f_k(x)=f(x-k)$ may be bounded and translation
+continuous for each fixed function, but the set $\{f_k:k\in\mathbb{N}\}$ is not
+compact in $\Lp(\R)$ because its mass escapes to infinity.
+
+\section{The Kolmogorov--Riesz Theorem}
+
+\begin{theorem}[Kolmogorov--Riesz compactness theorem]
+Let $1\leq p<\infty$ and let $\mathcal{F}\subset \Lp(\R^n)$. Then
+$\mathcal{F}$ is relatively compact in $\Lp(\R^n)$ if and only if the following
+three conditions hold:
+\begin{enumerate}[label=(\roman*)]
+  \item $\mathcal{F}$ is bounded in $\Lp(\R^n)$;
+  \item $\mathcal{F}$ is tight;
+  \item $\mathcal{F}$ is uniformly almost continuous, meaning
+  \[
+    \lim_{h\to 0}\sup_{f\in\mathcal{F}}\norm{\tau_h f-f}_{p}=0.
+  \]
+\end{enumerate}
+\end{theorem}
+
+On a bounded domain, the tightness condition is usually replaced by a boundary
+condition or becomes automatic after extending functions by zero and requiring
+control near the boundary. On the whole space $\R^n$, tightness is essential.
+
+\section{Why the Translation Condition Means Almost Continuity}
+
+For a single function $f\in\Lp(\R^n)$, translation continuity says that $f$ does
+not change much in average size when the input is shifted slightly. The
+Kolmogorov--Riesz theorem asks for the same behavior uniformly across all
+functions in $\mathcal{F}$. This is exactly the compactness analogue of
+equicontinuity.
+
+The condition
+\[
+  \sup_{f\in\mathcal{F}}\norm{\tau_h f-f}_{p}<\varepsilon
+\]
+for all sufficiently small $h$ says that there is one scale of translation that
+works for the entire family. Thus the family has no arbitrarily sharp spikes,
+oscillations, or jumps that appear at smaller and smaller scales.
+
+\begin{proposition}
+If $\mathcal{F}\subset \Lp(\R^n)$ is relatively compact, then $\mathcal{F}$ is
+uniformly almost continuous.
+\end{proposition}
+
+\begin{proof}
+Let $\varepsilon>0$. Since $\mathcal{F}$ is relatively compact, there exist
+$g_1,\dots,g_m\in\Lp(\R^n)$ such that for every $f\in\mathcal{F}$ there is
+$j$ with
+\[
+  \norm{f-g_j}_p<\varepsilon/3.
+\]
+For each fixed $g_j$, translation continuity gives a number $\delta_j>0$ such
+that $\abs{h}<\delta_j$ implies
+\[
+  \norm{\tau_h g_j-g_j}_p<\varepsilon/3.
+\]
+Let $\delta=\min_j\delta_j$. If $\abs{h}<\delta$ and $f\in\mathcal{F}$, choose
+$g_j$ with $\norm{f-g_j}_p<\varepsilon/3$. Since translations are isometries,
+\[
+\begin{aligned}
+  \norm{\tau_h f-f}_p
+  &\leq \norm{\tau_h f-\tau_h g_j}_p
+    +\norm{\tau_h g_j-g_j}_p
+    +\norm{g_j-f}_p  \\
+  &< \varepsilon.
+\end{aligned}
+\]
+Taking the supremum over $f\in\mathcal{F}$ proves uniform almost continuity.
+\end{proof}
+
+This proof is short but important. It shows that compactness forces a uniform
+translation scale. The more difficult direction is that boundedness, tightness,
+and almost continuity together imply compactness.
+
+\section{How Almost Continuity Enters the Proof}
+
+We sketch the main mechanism. Let $\rho$ be a standard smooth mollifier and set
+$\rho_\eta(x)=\eta^{-n}\rho(x/\eta)$. For $f\in\Lp(\R^n)$ define
+\[
+  f_\eta=\rho_\eta*f.
+\]
+Mollification averages the values of $f$ over a small ball. The translation
+condition controls the error introduced by this averaging:
+\[
+\begin{aligned}
+  \norm{\rho_\eta*f-f}_p
+  &=
+  \left\|
+    \int_{\R^n}\rho_\eta(y)\bigl(\tau_{-y}f-f\bigr)\,dy
+  \right\|_p \\
+  &\leq
+  \int_{\R^n}\rho_\eta(y)\norm{\tau_{-y}f-f}_p\,dy.
+\end{aligned}
+\]
+If $\eta$ is small, then $y$ is small on the support of $\rho_\eta$, and uniform
+almost continuity makes the last integral small uniformly for
+$f\in\mathcal{F}$. Therefore
+\[
+  \sup_{f\in\mathcal{F}}\norm{\rho_\eta*f-f}_p
+\]
+can be made arbitrarily small.
+
+Now tightness allows us to restrict attention to a large ball $B_R$. On $B_R$,
+the mollified functions are smoother and have uniform derivative bounds
+depending on $\eta$ and the $\Lp$ bound of $\mathcal{F}$. Smoothness gives
+finite-dimensional approximation: one may approximate the functions by their
+values, averages, or polynomial approximations on a sufficiently fine partition
+of $B_R$.
+
+Thus the proof has three approximation steps:
+\begin{enumerate}[label=(\arabic*)]
+  \item use tightness to ignore the tail outside a large ball;
+  \item use almost continuity to replace each $f$ by a mollified function
+  $\rho_\eta*f$;
+  \item use smoothness on the compact ball to approximate the mollified family
+  by finitely many parameters.
+\end{enumerate}
+These steps produce a finite $\varepsilon$-net for $\mathcal{F}$ in $\Lp$,
+which is exactly total boundedness. Since $\Lp(\R^n)$ is complete, total
+boundedness is equivalent to relative compactness.
+
+\section{A Useful Translation Criterion}
+
+The translation condition often appears in applications through estimates on
+gradients.
+
+\begin{proposition}
+Let $\Omega\subset\R^n$ be bounded and let
+$\mathcal{F}\subset W^{1,p}(\Omega)$ be bounded. After extending functions to
+$\R^n$ in a controlled way, $\mathcal{F}$ is uniformly almost continuous in
+$\Lp$ on compact subsets of $\Omega$.
+\end{proposition}
+
+\begin{proof}
+For a smooth function $f$ and small $h$, the fundamental theorem of calculus
+gives
+\[
+  f(x+h)-f(x)=\int_0^1 h\cdot \nabla f(x+th)\,dt.
+\]
+Taking $\Lp$ norms and using Minkowski's inequality,
+\[
+  \norm{\tau_h f-f}_p
+  \leq \abs{h}\,\norm{\nabla f}_p.
+\]
+The same estimate follows for Sobolev functions by approximation. If
+$\norm{\nabla f}_p$ is uniformly bounded over $\mathcal{F}$, then the right-hand
+side tends to zero uniformly as $h\to0$.
+\end{proof}
+
+This proposition explains why the Kolmogorov--Riesz theorem is closely related
+to compact Sobolev embeddings. A derivative bound prevents rapid oscillation,
+and this prevention is measured exactly by translation continuity.
+
+\section{Conclusion}
+
+The translation condition in the Kolmogorov--Riesz theorem is best understood
+as almost continuity in the $\Lp$ norm. It replaces pointwise equicontinuity
+with a condition that makes sense for equivalence classes of functions. Together
+with boundedness and tightness, it gives a complete compactness criterion in
+$\Lp(\R^n)$.
+
+The theorem is powerful because it separates the causes of non-compactness:
+unbounded size, escape of mass to infinity, and oscillation at arbitrarily small
+scales. The almost continuity condition rules out the third problem. In this
+way, it is the analytic heart of the compactness mechanism.
+
+\begin{thebibliography}{9}
+
+\bibitem{brezis}
+H. Brezis,
+\emph{Functional Analysis, Sobolev Spaces and Partial Differential Equations},
+Springer, 2011.
+
+\bibitem{folland}
+G. B. Folland,
+\emph{Real Analysis: Modern Techniques and Their Applications},
+2nd ed., Wiley, 1999.
+
+\bibitem{lieb-loss}
+E. H. Lieb and M. Loss,
+\emph{Analysis},
+2nd ed., American Mathematical Society, 2001.
+
+\bibitem{yosida}
+K. Yosida,
+\emph{Functional Analysis},
+6th ed., Springer, 1980.
+
+\end{thebibliography}
+
+\end{document}
