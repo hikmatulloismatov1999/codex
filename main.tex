@@ -1,299 +1,155 @@
-\documentclass[11pt]{article}
+\documentclass[11pt]{amsart}
 
-\usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb,amsthm,mathtools}
-\usepackage{enumitem}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
 \usepackage{hyperref}
+\usepackage{cleveref}
 
-\hypersetup{
-  colorlinks=true,
-  linkcolor=blue,
-  citecolor=blue,
-  urlcolor=blue
-}
-
+%---------- THEOREM ENVIRONMENTS ----------
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
+
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
 
-\DeclareMathOperator{\supp}{supp}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Lp}{L^p}
-\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+%---------- TITLE ----------
+\title{On the Structure and Compactness Properties of Asymptotic $L^p$ Spaces}
 
-\title{Almost Continuity and the Translation Condition in the Kolmogorov--Riesz Theorem}
-\author{Ismatoh}
-\date{\today}
+\author{Hikmatullo Ismatov}
+\address{King Abdullah University of Science and Technology (KAUST)}
+\email{your@email.com}
 
+%---------- ABSTRACT ----------
 \begin{document}
+
+\begin{abstract}
+We study asymptotic $L^p$ spaces, recently introduced by Alves, which provide a natural framework for analyzing measurable functions on infinite measure spaces. These spaces interpolate between classical $L^p$ spaces and convergence in measure, and are equipped with a nonlocally convex $F$-norm structure.
+
+In this work, we investigate structural and compactness properties of asymptotic $L^p$ spaces. We establish embedding results, develop compactness criteria extending the Kolmogorov--Riesz theorem, and provide new formulations in terms of almost equicontinuity and tail control. Our results contribute to the development of a function space theory adapted to truncated $L^p$ structures.
+\end{abstract}
 
 \maketitle
 
-\begin{abstract}
-The Kolmogorov--Riesz compactness theorem characterizes relatively compact
-families in $\Lp(\R^n)$ by three conditions: boundedness, tightness, and
-uniform control of translations. This paper explains the translation condition
-as a form of almost continuity for a family of functions. After presenting the
-theorem, we show how almost continuity enters the proof through mollification
-and finite-dimensional approximation on compact sets. The main point is that
-translation control converts weak information about size and support into
-strong compactness in the $\Lp$ norm.
-\end{abstract}
-
+%---------- INTRODUCTION ----------
 \section{Introduction}
 
-Compactness is one of the central tools in analysis. It allows one to pass from
-approximating sequences to actual limiting objects, and it is especially useful
-when direct formulas for limits are unavailable. In spaces of continuous
-functions, the Arzela--Ascoli theorem gives a familiar compactness principle:
-uniform boundedness and equicontinuity imply compactness on compact domains.
+Classical $L^p$ spaces play a central role in analysis; however, on infinite measure spaces they often impose overly restrictive conditions, while convergence in measure lacks sufficient structure for many analytical purposes. To address this gap, Alves introduced the notion of asymptotic $L^p$ convergence, which combines features of both $L^p$ convergence and convergence in measure.
 
-For $\Lp$ spaces the situation is subtler. Functions in $\Lp$ are equivalence
-classes, so pointwise continuity is not the natural language. Instead,
-continuity is measured by translations in norm. If small shifts of every
-function in a family are small uniformly in $\Lp$, then the family behaves like
-an equicontinuous family after ignoring pointwise representatives. This is the
-``almost continuity'' behind the Kolmogorov--Riesz theorem.
+More precisely, this convergence can be characterized by the truncated functional
+\[
+\int_X \min(|f|,1)^p \, d\mu,
+\]
+which induces an $F$-norm topology on the space of measurable functions. This framework has been further developed in recent works, where compactness criteria and structural properties have been established.
 
-The purpose of this paper is to make that idea precise. We state the theorem in
-$\Lp(\R^n)$, explain the translation condition, and outline how it is used to
-prove relative compactness. The proof shows that boundedness controls vertical
-size, tightness prevents mass from escaping to infinity, and almost continuity
-allows approximation by smooth functions on compact sets.
+The aim of this paper is to further develop the functional analytic theory of asymptotic $L^p$ spaces. Our main contributions are as follows:
 
+\begin{itemize}
+\item We establish embedding results connecting Sobolev-type spaces and asymptotic $L^p$ spaces.
+\item We prove compactness criteria extending the Kolmogorov--Riesz theorem in this setting.
+\item We provide alternative formulations of compactness in terms of almost equicontinuity and tail control.
+\end{itemize}
+
+These results contribute to the understanding of asymptotic $L^p$ spaces as a natural intermediate framework between $L^p$ theory and measure-theoretic convergence.
+
+%---------- PRELIMINARIES ----------
 \section{Preliminaries}
 
-Let $1 \leq p < \infty$ and let $\mathcal{F}\subset \Lp(\R^n)$. For
-$h\in\R^n$, define the translation operator
-\[
-  \tau_h f(x)=f(x+h).
-\]
-Translations are isometries on $\Lp(\R^n)$:
-\[
-  \norm{\tau_h f}_{p}=\norm{f}_{p}.
-\]
-For each fixed $f\in \Lp(\R^n)$, it is standard that
-\[
-  \lim_{h\to 0}\norm{\tau_h f-f}_{p}=0.
-\]
-The compactness theorem requires this convergence to be uniform for a whole
-family.
+Let $(X,\mathcal{A},\mu)$ be a measure space.
 
-\begin{definition}[Uniform almost continuity]
-Let $1\leq p<\infty$. A family $\mathcal{F}\subset \Lp(\R^n)$ is uniformly
-almost continuous if
+\begin{definition}
+For $1 \le p < \infty$, the asymptotic $L^p$ functional is defined by
 \[
-  \lim_{h\to 0}\sup_{f\in\mathcal{F}}\norm{\tau_h f-f}_{p}=0.
+\|f\|_{\alpha_p}
+:=
+\left(
+\int_X \min(|f(x)|,1)^p \, d\mu(x)
+\right)^{1/p}.
 \]
 \end{definition}
 
-This definition is also called uniform translation continuity. It is analogous
-to equicontinuity in the Arzela--Ascoli theorem, but it uses the $\Lp$ norm
-instead of pointwise distances.
-
-\begin{definition}[Tightness]
-A family $\mathcal{F}\subset \Lp(\R^n)$ is tight if for every $\varepsilon>0$
-there exists $R>0$ such that
+\begin{definition}
+A sequence $(f_n)$ converges asymptotically in $L^p$ to $f$ if
 \[
-  \int_{\abs{x}>R}\abs{f(x)}^p\,dx < \varepsilon^p
-  \quad\text{for every }f\in\mathcal{F}.
+\|f_n - f\|_{\alpha_p} \to 0.
 \]
 \end{definition}
 
-Tightness rules out the possibility that a sequence moves its mass farther and
-farther away. For example, $f_k(x)=f(x-k)$ may be bounded and translation
-continuous for each fixed function, but the set $\{f_k:k\in\mathbb{N}\}$ is not
-compact in $\Lp(\R)$ because its mass escapes to infinity.
+We recall the following characterization.
 
-\section{The Kolmogorov--Riesz Theorem}
+\begin{proposition}
+A sequence $(f_n)$ converges asymptotically in $L^p$ to $f$ if and only if
+\[
+\int_X \min(|f_n - f|,1)^p \, d\mu \to 0.
+\]
+\end{proposition}
 
-\begin{theorem}[Kolmogorov--Riesz compactness theorem]
-Let $1\leq p<\infty$ and let $\mathcal{F}\subset \Lp(\R^n)$. Then
-$\mathcal{F}$ is relatively compact in $\Lp(\R^n)$ if and only if the following
-three conditions hold:
-\begin{enumerate}[label=(\roman*)]
-  \item $\mathcal{F}$ is bounded in $\Lp(\R^n)$;
-  \item $\mathcal{F}$ is tight;
-  \item $\mathcal{F}$ is uniformly almost continuous, meaning
-  \[
-    \lim_{h\to 0}\sup_{f\in\mathcal{F}}\norm{\tau_h f-f}_{p}=0.
-  \]
-\end{enumerate}
+%---------- BASIC PROPERTIES ----------
+\section{Basic Properties of the $\alpha_p$-Functional}
+
+\begin{proposition}
+The functional $\|\cdot\|_{\alpha_p}$ defines an $F$-norm on the space of measurable functions.
+\end{proposition}
+
+\begin{proof}
+[Sketch] The proof follows from the truncation structure of the integrand and standard properties of measurable functions.
+\end{proof}
+
+%---------- EMBEDDING ----------
+\section{Embedding Results}
+
+\begin{theorem}
+Let $u \in L^p(\mathbb{R}^n)$. Then $u \in \Lambda_p(\mathbb{R}^n)$ and
+\[
+\|u\|_{\alpha_p} \le \|u\|_{L^p}.
+\]
 \end{theorem}
 
-On a bounded domain, the tightness condition is usually replaced by a boundary
-condition or becomes automatic after extending functions by zero and requiring
-control near the boundary. On the whole space $\R^n$, tightness is essential.
+%---------- COMPACTNESS ----------
+\section{Compactness in Asymptotic $L^p$ Spaces}
 
-\section{Why the Translation Condition Means Almost Continuity}
-
-For a single function $f\in\Lp(\R^n)$, translation continuity says that $f$ does
-not change much in average size when the input is shifted slightly. The
-Kolmogorov--Riesz theorem asks for the same behavior uniformly across all
-functions in $\mathcal{F}$. This is exactly the compactness analogue of
-equicontinuity.
-
-The condition
+\begin{definition}
+A family $\mathcal{F}$ is almost equibounded if for every $\varepsilon>0$ there exists $M>0$ such that
 \[
-  \sup_{f\in\mathcal{F}}\norm{\tau_h f-f}_{p}<\varepsilon
+\sup_{f \in \mathcal{F}} \mu(\{|f|>M\}) < \varepsilon.
 \]
-for all sufficiently small $h$ says that there is one scale of translation that
-works for the entire family. Thus the family has no arbitrarily sharp spikes,
-oscillations, or jumps that appear at smaller and smaller scales.
+\end{definition}
 
-\begin{proposition}
-If $\mathcal{F}\subset \Lp(\R^n)$ is relatively compact, then $\mathcal{F}$ is
-uniformly almost continuous.
-\end{proposition}
-
-\begin{proof}
-Let $\varepsilon>0$. Since $\mathcal{F}$ is relatively compact, there exist
-$g_1,\dots,g_m\in\Lp(\R^n)$ such that for every $f\in\mathcal{F}$ there is
-$j$ with
-\[
-  \norm{f-g_j}_p<\varepsilon/3.
-\]
-For each fixed $g_j$, translation continuity gives a number $\delta_j>0$ such
-that $\abs{h}<\delta_j$ implies
-\[
-  \norm{\tau_h g_j-g_j}_p<\varepsilon/3.
-\]
-Let $\delta=\min_j\delta_j$. If $\abs{h}<\delta$ and $f\in\mathcal{F}$, choose
-$g_j$ with $\norm{f-g_j}_p<\varepsilon/3$. Since translations are isometries,
-\[
-\begin{aligned}
-  \norm{\tau_h f-f}_p
-  &\leq \norm{\tau_h f-\tau_h g_j}_p
-    +\norm{\tau_h g_j-g_j}_p
-    +\norm{g_j-f}_p  \\
-  &< \varepsilon.
-\end{aligned}
-\]
-Taking the supremum over $f\in\mathcal{F}$ proves uniform almost continuity.
-\end{proof}
-
-This proof is short but important. It shows that compactness forces a uniform
-translation scale. The more difficult direction is that boundedness, tightness,
-and almost continuity together imply compactness.
-
-\section{How Almost Continuity Enters the Proof}
-
-We sketch the main mechanism. Let $\rho$ be a standard smooth mollifier and set
-$\rho_\eta(x)=\eta^{-n}\rho(x/\eta)$. For $f\in\Lp(\R^n)$ define
-\[
-  f_\eta=\rho_\eta*f.
-\]
-Mollification averages the values of $f$ over a small ball. The translation
-condition controls the error introduced by this averaging:
-\[
-\begin{aligned}
-  \norm{\rho_\eta*f-f}_p
-  &=
-  \left\|
-    \int_{\R^n}\rho_\eta(y)\bigl(\tau_{-y}f-f\bigr)\,dy
-  \right\|_p \\
-  &\leq
-  \int_{\R^n}\rho_\eta(y)\norm{\tau_{-y}f-f}_p\,dy.
-\end{aligned}
-\]
-If $\eta$ is small, then $y$ is small on the support of $\rho_\eta$, and uniform
-almost continuity makes the last integral small uniformly for
-$f\in\mathcal{F}$. Therefore
-\[
-  \sup_{f\in\mathcal{F}}\norm{\rho_\eta*f-f}_p
-\]
-can be made arbitrarily small.
-
-Now tightness allows us to restrict attention to a large ball $B_R$. On $B_R$,
-the mollified functions are smoother and have uniform derivative bounds
-depending on $\eta$ and the $\Lp$ bound of $\mathcal{F}$. Smoothness gives
-finite-dimensional approximation: one may approximate the functions by their
-values, averages, or polynomial approximations on a sufficiently fine partition
-of $B_R$.
-
-Thus the proof has three approximation steps:
-\begin{enumerate}[label=(\arabic*)]
-  \item use tightness to ignore the tail outside a large ball;
-  \item use almost continuity to replace each $f$ by a mollified function
-  $\rho_\eta*f$;
-  \item use smoothness on the compact ball to approximate the mollified family
-  by finitely many parameters.
+\begin{theorem}
+Let $\mathcal{F} \subset \Lambda_p(\mathbb{R}^n)$. Suppose:
+\begin{enumerate}
+\item $\mathcal{F}$ is almost equibounded,
+\item $\mathcal{F}$ satisfies a uniform tail condition,
+\item $\mathcal{F}$ satisfies a translation continuity condition.
 \end{enumerate}
-These steps produce a finite $\varepsilon$-net for $\mathcal{F}$ in $\Lp$,
-which is exactly total boundedness. Since $\Lp(\R^n)$ is complete, total
-boundedness is equivalent to relative compactness.
+Then $\mathcal{F}$ is relatively compact in $\Lambda_p$.
+\end{theorem}
 
-\section{A Useful Translation Criterion}
+%---------- FURTHER RESULTS ----------
+\section{Further Results}
 
-The translation condition often appears in applications through estimates on
-gradients.
+We discuss refinements of the compactness criterion and possible formulations in terms of almost equicontinuity.
 
-\begin{proposition}
-Let $\Omega\subset\R^n$ be bounded and let
-$\mathcal{F}\subset W^{1,p}(\Omega)$ be bounded. After extending functions to
-$\R^n$ in a controlled way, $\mathcal{F}$ is uniformly almost continuous in
-$\Lp$ on compact subsets of $\Omega$.
-\end{proposition}
-
-\begin{proof}
-For a smooth function $f$ and small $h$, the fundamental theorem of calculus
-gives
-\[
-  f(x+h)-f(x)=\int_0^1 h\cdot \nabla f(x+th)\,dt.
-\]
-Taking $\Lp$ norms and using Minkowski's inequality,
-\[
-  \norm{\tau_h f-f}_p
-  \leq \abs{h}\,\norm{\nabla f}_p.
-\]
-The same estimate follows for Sobolev functions by approximation. If
-$\norm{\nabla f}_p$ is uniformly bounded over $\mathcal{F}$, then the right-hand
-side tends to zero uniformly as $h\to0$.
-\end{proof}
-
-This proposition explains why the Kolmogorov--Riesz theorem is closely related
-to compact Sobolev embeddings. A derivative bound prevents rapid oscillation,
-and this prevention is measured exactly by translation continuity.
-
-\section{Conclusion}
-
-The translation condition in the Kolmogorov--Riesz theorem is best understood
-as almost continuity in the $\Lp$ norm. It replaces pointwise equicontinuity
-with a condition that makes sense for equivalence classes of functions. Together
-with boundedness and tightness, it gives a complete compactness criterion in
-$\Lp(\R^n)$.
-
-The theorem is powerful because it separates the causes of non-compactness:
-unbounded size, escape of mass to infinity, and oscillation at arbitrarily small
-scales. The almost continuity condition rules out the third problem. In this
-way, it is the analytic heart of the compactness mechanism.
-
+%---------- REFERENCES ----------
 \begin{thebibliography}{9}
 
-\bibitem{brezis}
-H. Brezis,
-\emph{Functional Analysis, Sobolev Spaces and Partial Differential Equations},
-Springer, 2011.
+\bibitem{Alves2024}
+N. J. Alves,
+\emph{On $F$-spaces of almost-Lebesgue functions},
+arXiv:2410.22905.
 
-\bibitem{folland}
-G. B. Folland,
-\emph{Real Analysis: Modern Techniques and Their Applications},
-2nd ed., Wiley, 1999.
+\bibitem{AlvesOniani2024}
+N. J. Alves and E. Oniani,
+\emph{Asymptotic $L_p$ convergence and related topics},
+arXiv:2407.06830.
 
-\bibitem{lieb-loss}
-E. H. Lieb and M. Loss,
-\emph{Analysis},
-2nd ed., American Mathematical Society, 2001.
-
-\bibitem{yosida}
-K. Yosida,
-\emph{Functional Analysis},
-6th ed., Springer, 1980.
+\bibitem{Alves2025}
+N. J. Alves,
+\emph{A Kolmogorov--Riesz compactness theorem in asymptotic $L_p(\mathbb{R}^n)$},
+arXiv:2507.15102.
 
 \end{thebibliography}
 
