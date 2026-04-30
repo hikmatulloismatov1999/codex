@@ -17,6 +17,7 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
 \newtheorem{example}{Example}
+\newtheorem{problem}{Problem}
 
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}
@@ -26,7 +27,7 @@
 \newcommand{\eps}{\varepsilon}
 \newcommand{\meas}[1]{\lvert #1\rvert}
 
-\title{Almost Equicontinuity Implies the Translation Condition}
+\title{Almost Equicontinuity and Truncated Translation Conditions}
 \author{Hikmatullo Ismatov}
 \date{}
 
@@ -57,17 +58,21 @@ developed by Alves~\cite{AlvesKR,AlvesF}. Related comparisons between
 asymptotic $L^p$ convergence and classical modes of convergence are discussed
 in~\cite{AlvesOniani}.
 
-The purpose of this note is to isolate one elementary implication used in this
-circle of ideas. We show that almost equicontinuity, together with support in a
-fixed set of finite measure, implies the truncated translation condition. The
-proof is included in detail because the truncation and the finite-measure
-support assumption play distinct roles.
+The purpose of this note is to isolate several elementary facts in this circle
+of ideas. First, we show in Theorem~\ref{thm:main} that almost
+equicontinuity, together with support in a fixed set of finite measure,
+implies the truncated translation condition. The proof is included in detail
+because the truncation and the finite-measure support assumption play distinct
+roles.
 
-We conclude with a simple example showing that the finite-measure assumption
-is essential for this implication, even for a family consisting of one bounded
-smooth function. We then prove that the same conclusion remains valid on
+Second, Example~\ref{ex:sin} shows that the finite-measure assumption is not
+cosmetic: even a singleton family consisting of one bounded smooth function on
+$\R$ may fail the truncated translation condition. Third,
+Theorem~\ref{thm:tail} proves that the same conclusion remains valid on
 infinite-measure domains if the supports of the family are uniformly tight in
-measure.
+measure. Finally, we record two examples related to the converse direction,
+where one asks whether the truncated translation condition forces almost
+equicontinuity.
 
 \section{Definitions and statement}
 
@@ -447,6 +452,111 @@ Combining \eqref{eq:ball-symdiff-small}, \eqref{eq:tail-interior}, and
 The estimate is uniform in $f\in\F$. Since $\widetilde\eps>0$ was arbitrary,
 the desired limit follows.
 \end{proof}
+
+\section{Examples for the converse direction}
+
+The opposite direction asks whether the truncated translation condition can
+force almost equicontinuity. The following two examples are useful tests for
+any proposed converse theorem.
+
+\begin{example}[moving intervals]\label{ex:moving-intervals}
+Let
+\[
+    \F:=\{\mathbf 1_{(a,a+1)}:a\in\R\}.
+\]
+Then $\F$ satisfies the truncated translation condition and is almost
+equicontinuous.
+\end{example}
+
+\begin{proof}
+For $f_a:=\mathbf 1_{(a,a+1)}$, the integrand
+$\min(|f_a(x+y)-f_a(x)|,1)$ is the indicator function of the symmetric
+difference of $(a,a+1)$ and $(a-y,a+1-y)$. Hence, for $|y|<1$,
+\[
+    \int_{\R}\min\bigl(|f_a(x+y)-f_a(x)|,1\bigr)\,dx
+    =
+    \meas{(a,a+1)\triangle(a-y,a+1-y)}
+    \le 2|y|.
+\]
+The estimate is independent of $a$, and therefore
+\[
+    \lim_{|y|\to0}\sup_{f\in\F}
+    \int_{\R}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0.
+\]
+
+We now verify almost equicontinuity. Given $\eps>0$, choose
+$\rho>0$ so small that $4\rho<\eps$, and set $\delta:=\rho$. For
+$f_a\in\F$, define
+\[
+    B_a:=(a-\rho,a+\rho)\cup(a+1-\rho,a+1+\rho).
+\]
+Then $\meas{B_a}=4\rho<\eps$. If $x,z\in\R\setminus B_a$ and
+$|x-z|<\delta$, then the two points cannot lie on opposite sides of either
+endpoint $a$ or $a+1$. Thus $f_a(x)=f_a(z)$, and hence
+$|f_a(x)-f_a(z)|=0<\eps$.
+\end{proof}
+
+\begin{example}[oscillating combs]\label{ex:combs}
+For $n\ge1$, let
+\[
+    A_n:=
+    \bigcup_{k=0}^{n-1}
+    \left(\frac{k}{n},\,\frac{k}{n}+\frac{1}{2n}\right),
+    \qquad
+    f_n:=\mathbf 1_{A_n}.
+\]
+Then the family $\F:=\{f_n:n\ge1\}$ is not almost equicontinuous, and it
+does not satisfy the truncated translation condition.
+\end{example}
+
+\begin{proof}
+We first show that almost equicontinuity fails. Fix the accuracy
+$\eps_0:=1/2$. Let $\delta>0$ be arbitrary, and choose $n$ so large that
+$1/n<\delta$. In each interval
+\[
+    I_{n,k}:=\left(\frac{k}{n},\,\frac{k+1}{n}\right),
+    \qquad k=0,\dots,n-1,
+\]
+the function $f_n$ is equal to $1$ on the left half and $0$ on the right half.
+If a measurable set $B\subset\R$ satisfies the almost-equicontinuity
+implication for $f_n$ at scale $\delta$ and accuracy $\eps_0$, then $B$ must
+contain one of the two half-intervals in each $I_{n,k}$, up to null sets.
+Otherwise there would be points $x,z\in I_{n,k}\setminus B$ in opposite
+halves, and then $|x-z|<1/n<\delta$ while $|f_n(x)-f_n(z)|=1$.
+Consequently,
+\[
+    \meas{B}\ge
+    \sum_{k=0}^{n-1}\frac{1}{2n}
+    =\frac12.
+\]
+This is impossible if the exceptional set is required to have measure less
+than $\eps_0=1/2$. Therefore $\F$ is not almost equicontinuous.
+
+The same oscillation also violates the truncated translation condition. Let
+$y_n:=1/(2n)$. Then $y_n\to0$, and for every
+$x\in(0,1-y_n)$ the points $x$ and $x+y_n$ lie in opposite halves of adjacent
+or identical subintervals. Hence
+\[
+    |f_n(x+y_n)-f_n(x)|=1
+    \qquad (0<x<1-y_n).
+\]
+It follows that
+\[
+    \sup_{f\in\F}
+    \int_{\R}\min\bigl(|f(x+y_n)-f(x)|,1\bigr)\,dx
+    \ge
+    \int_0^{1-y_n}1\,dx
+    =1-y_n.
+\]
+Since $1-y_n\to1$, the truncated translation condition cannot hold.
+\end{proof}
+
+\begin{problem}\label{prob:converse}
+Find natural hypotheses under which the truncated translation condition
+implies almost equicontinuity. In particular, determine whether the implication
+holds for families supported in a common finite-measure set, or whether an
+additional compactness, tightness, or regularity hypothesis is required.
+\end{problem}
 
 \section{Remarks}
 
