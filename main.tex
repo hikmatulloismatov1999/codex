@@ -12,6 +12,7 @@
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
 \newtheorem{lemma}{Lemma}
 
 \theoremstyle{definition}
@@ -45,7 +46,8 @@ direction, we prove that the interior truncated translation condition implies
 almost equicontinuity on finite-measure domains. The forward proof separates
 the estimate into a symmetric-difference part, a regular part, and an
 exceptional part, while the converse uses a cube decomposition and a
-bad-pair counting argument.
+bad-pair counting argument. We finally record a local consequence of the
+global zero-extension condition on arbitrary measurable domains.
 \end{abstract}
 
 \section{Introduction}
@@ -73,7 +75,9 @@ Theorem~\ref{thm:tail} proves that the same conclusion remains valid on
 infinite-measure domains if the supports of the family are uniformly tight in
 measure. Finally, after two examples related to the converse direction, we
 prove in Theorem~\ref{thm:converse} that the interior truncated translation
-condition implies almost equicontinuity on a finite-measure domain.
+condition implies almost equicontinuity on a finite-measure domain. We then
+record in Proposition~\ref{prop:local-zero-extension-converse} what the
+global zero-extension condition gives on arbitrary domains.
 
 \section{Preliminaries and first theorem}
 
@@ -768,11 +772,60 @@ condition.
 Therefore $\F$ must be almost equicontinuous on $E$.
 \end{proof}
 
+\section{A local consequence of the zero-extension condition}
+
+Let $E\subset\R^n$ be measurable, and let $f:E\to\R$ be measurable. We denote
+by $\widetilde f$ the zero extension of $f$ to $\R^n$:
+\[
+    \widetilde f(x):=
+    \begin{cases}
+        f(x), & x\in E,\\
+        0, & x\notin E.
+    \end{cases}
+\]
+
+\begin{proposition}[local zero-extension converse]
+\label{prop:local-zero-extension-converse}
+Let $E\subset\R^n$ be measurable, not necessarily of finite measure, and let
+$\F$ be a family of real-valued measurable functions on $E$. Suppose that the
+zero extensions satisfy
+\[
+    \lim_{|y|\to0}\sup_{f\in\F}
+    \int_{\R^n}
+    \min\bigl(|\widetilde f(x+y)-\widetilde f(x)|,1\bigr)\,dx=0.
+\]
+Then, for every measurable set $K\subset E$ with $\meas{K}<\infty$, the
+restricted family
+\[
+    \F|_K:=\{f|_K:f\in\F\}
+\]
+is almost equicontinuous on $K$.
+\end{proposition}
+
+\begin{proof}
+Fix such a set $K$. If $x\in K\cap(K-y)$, then $x$ and $x+y$ both belong to
+$E$, and hence $\widetilde f(x)=f(x)$ and $\widetilde f(x+y)=f(x+y)$.
+Therefore, for every $f\in\F$ and every $y\in\R^n$,
+\[
+    \int_{K\cap(K-y)}
+    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx
+    \le
+    \int_{\R^n}
+    \min\bigl(|\widetilde f(x+y)-\widetilde f(x)|,1\bigr)\,dx .
+\]
+Taking the supremum over $f\in\F$ and letting $y\to0$, we obtain the
+interior truncated translation condition on $K$. Since $\meas{K}<\infty$,
+Theorem~\ref{thm:converse} applies to the restrictions of the functions in
+$\F$ to $K$. Thus $\F|_K$ is almost equicontinuous on $K$.
+\end{proof}
+
 \begin{problem}\label{prob:converse}
-Theorem~\ref{thm:converse} treats the interior translation condition on a
-finite-measure domain. A remaining question is to identify the best analogue
-for zero extensions on all of $\R^n$, especially when boundary effects and
-infinite-measure tails are both present.
+Proposition~\ref{prop:local-zero-extension-converse} shows that the global
+zero-extension condition forces almost equicontinuity on every finite-measure
+piece of the domain. The remaining question is whether these local
+exceptional sets can be chosen in a way that yields almost equicontinuity on
+all of $E$, or whether one can construct a counterexample in which small
+oscillations are distributed over infinitely many distant pieces.
 \end{problem}
 
 \section{Remarks}
