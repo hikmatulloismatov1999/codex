@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{geometry}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \geometry{margin=1in}
 
 \newtheorem{theorem}{Theorem}
@@ -30,6 +31,23 @@ two parts: a regular region, where almost equicontinuity gives pointwise
 control, and an exceptional region, whose contribution is controlled by the
 truncation.
 \end{abstract}
+
+\section{Introduction}
+
+Translation conditions are central in the classical
+Kolmogorov--Riesz--Fréchet compactness theory; see, for instance, the modern
+discussion in \cite{HancheOlsenHolden}. In the asymptotic $L^p$ framework,
+the ordinary $L^p$ distance is replaced by a truncated quantity involving
+$\min(|f|,1)$, and the corresponding compactness theory has recently been
+developed by Alves \cite{AlvesKR,AlvesF}. Related comparisons between
+asymptotic $L^p$ convergence and classical modes of convergence are discussed
+in \cite{AlvesOniani}.
+
+The purpose of this note is to isolate one elementary implication used in this
+circle of ideas. We show that almost equicontinuity, together with support in a
+fixed set of finite measure, implies the truncated translation condition of
+Definition~\ref{def:translation}. The proof is included in detail because the
+truncation and the finite-measure support assumption play distinct roles.
 
 \section{Definitions and statement}
 
@@ -91,7 +109,8 @@ of real-valued measurable functions on $\R^n$. Assume that:
     \item[\textup{(H1)}] $f(x)=0$ for every $x\notin E$ and every $f\in\F$;
     \item[\textup{(H2)}] $\F$ is almost equicontinuous.
 \end{enumerate}
-Then $\F$ satisfies the truncated translation condition; that is,
+Then $\F$ satisfies the truncated translation condition in the sense of
+Definition~\ref{def:translation}; that is,
 \[
     \lim_{|y|\to 0}\sup_{f\in\F}
     \int_{\R^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0.
@@ -119,9 +138,9 @@ the conclusion is immediate. We therefore assume that
 
 Let $\eps^{*}>0$ be given. Choose
 \begin{equation}\label{eq:eta-gamma-choice}
-    \eta:=\frac{\eps^{*}}{8m(E)},
+    \eta:=\frac{\eps^{*}}{4m(E)},
     \qquad
-    \gamma:=\frac{\eps^{*}}{8}.
+    \gamma:=\frac{\eps^{*}}{4}.
 \end{equation}
 By the equivalent two-tolerance formulation in
 Remark~\ref{rem:two-params}, there exists $\rho>0$ such that for every
@@ -137,7 +156,7 @@ and
 \end{equation}
 Set $r:=\rho$. We will show that
 \[
-    \sup_{f\in\F}I(f,y)<\eps^{*}
+    \sup_{f\in\F}I(f,y)\le \eps^{*}
     \qquad\text{whenever } |y|<r.
 \]
 
@@ -204,7 +223,7 @@ $\min(a,1)\le a$ for $a\ge 0$ imply
     &\le \eta\,m(R(f,y)) \\
     &\le \eta\,m(E\cup(E-y)) \\
     &\le 2\eta\,m(E) \\
-    &= \frac{\eps^{*}}{4},
+    &= \frac{\eps^{*}}{2},
 \end{aligned}
 \]
 where the last equality follows from \eqref{eq:eta-gamma-choice}. On the
@@ -215,22 +234,22 @@ exceptional region, the integrand is bounded by $1$, and therefore
     &\le m\bigl((E\cup(E-y))\cap X(f,y)\bigr) \\
     &\le m(X(f,y)) \\
     &<2\gamma \\
-    &= \frac{\eps^{*}}{4}.
+    &= \frac{\eps^{*}}{2}.
 \end{aligned}
 \]
 Thus
 \[
-    I(f,y)<\frac{\eps^{*}}{2}
+    I(f,y)<\eps^{*}
 \]
 for every $f\in\F$ and every $|y|<r$. Taking the supremum over
 $f\in\F$ yields
 \[
     \sup_{f\in\F}I(f,y)
-    \le \frac{\eps^{*}}{2}
-    <\eps^{*}
+    \le \eps^{*}
     \qquad (|y|<r).
 \]
-Since $\eps^{*}>0$ was arbitrary, the truncated translation condition follows.
+Since $\eps^{*}>0$ was arbitrary, this is equivalent to the truncated
+translation condition in Definition~\ref{def:translation}.
 \end{proof}
 
 \begin{corollary}\label{cor:p-version}
@@ -277,5 +296,30 @@ bounded by
 Without such a finite-measure localization, the regular-region estimate need
 not be useful.
 \end{remark}
+
+\begin{thebibliography}{9}
+
+\bibitem{AlvesKR}
+N. J. Alves,
+\emph{Kolmogorov--Riesz compactness in asymptotic $L_p$ spaces},
+arXiv:2507.15102, 2025; revised 2026.
+
+\bibitem{AlvesF}
+N. J. Alves,
+\emph{On $\mathrm{F}$-spaces of almost-Lebesgue functions},
+Acta Mathematica Hungarica \textbf{176} (2025), no.~2, 365--386.
+
+\bibitem{AlvesOniani}
+N. J. Alves and G. G. Oniani,
+\emph{Relation between asymptotic $L_p$-convergence and some classical modes
+of convergence},
+Real Analysis Exchange \textbf{49} (2024), no.~2, 389--396.
+
+\bibitem{HancheOlsenHolden}
+H. Hanche-Olsen and H. Holden,
+\emph{The Kolmogorov--Riesz compactness theorem},
+Expositiones Mathematicae \textbf{28} (2010), no.~4, 385--394.
+
+\end{thebibliography}
 
 \end{document}
