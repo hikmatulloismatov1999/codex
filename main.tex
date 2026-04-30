@@ -46,12 +46,12 @@ equicontinuity, and an exceptional part controlled by the truncation.
 
 Translation conditions are central in the classical
 Kolmogorov--Riesz--Fréchet compactness theory; see, for instance, the modern
-discussion in \cite{HancheOlsenHolden}. In the asymptotic $L^p$ framework,
+discussion in~\cite{HancheOlsenHolden}. In the asymptotic $L^p$ framework,
 the ordinary $L^p$ distance is replaced by a truncated quantity involving
 $\min(|f|,1)$, and the corresponding compactness theory has recently been
-developed by Alves \cite{AlvesKR,AlvesF}. Related comparisons between
+developed by Alves~\cite{AlvesKR,AlvesF}. Related comparisons between
 asymptotic $L^p$ convergence and classical modes of convergence are discussed
-in \cite{AlvesOniani}.
+in~\cite{AlvesOniani}.
 
 The purpose of this note is to isolate one elementary implication used in this
 circle of ideas. We show that almost equicontinuity, together with support in a
@@ -124,7 +124,7 @@ Theorem~\ref{thm:main} below uses Definition~\ref{def:ae} directly.
 \begin{theorem}\label{thm:main}
 Let $E\subset\R^n$ be measurable with $m(E)<\infty$, and let $\F$ be a family
 of real-valued measurable functions on $\R^n$. Assume that:
-\begin{enumerate}[label=\textup{(H\arabic*)},ref=H\arabic*]
+\begin{enumerate}[label=\textup{(H\arabic*)},ref=\textup{(H\arabic*)}]
     \item\label{hyp:support} $f(x)=0$ for every $x\notin E$ and every
     $f\in\F$;
     \item\label{hyp:ae} $\F$ is almost equicontinuous.
@@ -184,7 +184,7 @@ Let $\alpha>0$ be given. Choose
         \frac{\alpha}{6}
     \right\}.
 \end{equation}
-By Lemma~\ref{lem:symdiff}, there exists $r_0>0$ such that
+Lemma~\ref{lem:symdiff} gives a number $r_0>0$ such that
 \begin{equation}\label{eq:symdiff-small}
     |y|<r_0
     \quad\Longrightarrow\quad
@@ -219,8 +219,8 @@ $I(f,y)$ is supported in $E\cup(E-y)$, and so
     \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx .
 \end{equation}
 We now split the localized integral into the symmetric-difference part and the
-intersection part. The symmetric-difference contribution is small by
-\eqref{eq:symdiff-small}, since the integrand is bounded by $1$:
+intersection part. Since the integrand is bounded by $1$, the
+symmetric-difference estimate in equation~\eqref{eq:symdiff-small} gives
 \begin{equation}\label{eq:symdiff-part}
     \int_{E\triangle(E-y)}
     \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx
@@ -235,7 +235,8 @@ and define the regular part of the intersection by
 \[
     R(f,y):=(E\cap(E-y))\setminus X(f,y).
 \]
-By \eqref{eq:exceptional-size} and translation invariance,
+The exceptional-set estimate in equation~\eqref{eq:exceptional-size}, together
+with translation invariance, gives
 \begin{equation}\label{eq:X-size}
     m(X(f,y))
     \le m(B_f)+m(B_f-y)
@@ -244,7 +245,8 @@ By \eqref{eq:exceptional-size} and translation invariance,
 \end{equation}
 
 If $x\in R(f,y)$, then both $x$ and $x+y$ lie outside $B_f$. Since
-$|x-(x+y)|=|y|<\delta$, the estimate \eqref{eq:ae-control} gives
+$|x-(x+y)|=|y|<\delta$, the almost-equicontinuity estimate in
+equation~\eqref{eq:ae-control} gives
 \begin{equation}\label{eq:regular-pointwise}
     |f(x+y)-f(x)|<\eps
     \qquad (x\in R(f,y)).
@@ -269,25 +271,27 @@ and
     \int_{(E\cap(E-y))\cap X(f,y)}
     \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx .
 \]
-On the regular region, \eqref{eq:regular-pointwise} and the inequality
-$\min(a,1)\le a$ for $a\ge 0$ imply
+On the regular region, the pointwise bound in
+equation~\eqref{eq:regular-pointwise} and the inequality $\min(a,1)\le a$
+for $a\ge 0$ imply
 \[
     I_{\mathrm{reg}}(f,y)
     \le \eps\,m(R(f,y))
     \le \eps\,m(E)
     \le \frac{\alpha}{3},
 \]
-where we used $R(f,y)\subset E$ and \eqref{eq:epsilon-choice}. On the
-exceptional region, the integrand is bounded by $1$, and \eqref{eq:X-size}
-gives
+where we used $R(f,y)\subset E$ and the choice of $\eps$ in
+equation~\eqref{eq:epsilon-choice}. On the exceptional region, the integrand
+is bounded by $1$, and the estimate in equation~\eqref{eq:X-size} gives
 \[
     I_{\mathrm{exc}}(f,y)
     \le m(X(f,y))
     <2\eps
     \le \frac{\alpha}{3}.
 \]
-Combining these two bounds with \eqref{eq:localization} and
-\eqref{eq:symdiff-part}, we obtain $I(f,y)<\alpha$ for every $f\in\F$ and
+Combining these two bounds with the localization identity~\eqref{eq:localization}
+and the symmetric-difference estimate~\eqref{eq:symdiff-part}, we obtain
+$I(f,y)<\alpha$ for every $f\in\F$ and
 every $|y|<r$.
 Taking the supremum over $f\in\F$ yields
 \[
@@ -324,9 +328,9 @@ The conclusion follows immediately from Theorem~\ref{thm:main}.
 
 \begin{remark}
 The proof uses Definition~\ref{def:ae} in its one-parameter form. The choice
-in \eqref{eq:epsilon-choice} ensures that the same parameter $\eps$ is small
-enough for both estimates: it controls the oscillation on the regular region
-and the measure of the exceptional region.
+in equation~\eqref{eq:epsilon-choice} ensures that the same parameter $\eps$
+is small enough for both estimates: it controls the oscillation on the regular
+region and the measure of the exceptional region.
 \end{remark}
 
 \begin{remark}
@@ -337,7 +341,7 @@ estimate uses only that the truncated integrand is bounded above by $1$.
 
 \begin{remark}
 The finite-measure support assumption is used precisely in
-\eqref{eq:symdiff-small} and in the estimate of the regular-region
+equation~\eqref{eq:symdiff-small} and in the estimate of the regular-region
 contribution. The first use makes the symmetric-difference part vanish as
 $y\to0$; the second gives
 \[
