@@ -100,6 +100,9 @@ $\eps=\min\{\eta,\gamma\}$. The resulting exceptional set satisfies
 $m(B_f)<\eps\le\gamma$, and the oscillation is bounded by
 $\eps\le\eta$. Conversely, taking $\eta=\gamma=\eps$ gives
 Definition~\ref{def:ae}.
+
+Although this equivalent form is sometimes convenient, the proof of
+Theorem~\ref{thm:main} below uses Definition~\ref{def:ae} directly.
 \end{remark}
 
 \begin{theorem}\label{thm:main}
@@ -137,24 +140,25 @@ the conclusion is immediate. We therefore assume that
 \]
 
 Let $\eps^{*}>0$ be given. Choose
-\begin{equation}\label{eq:eta-gamma-choice}
-    \eta:=\frac{\eps^{*}}{4m(E)},
-    \qquad
-    \gamma:=\frac{\eps^{*}}{4}.
+\begin{equation}\label{eq:epsilon-choice}
+    \eps:=
+    \min\left\{
+        \frac{\eps^{*}}{4m(E)},
+        \frac{\eps^{*}}{4}
+    \right\}.
 \end{equation}
-By the equivalent two-tolerance formulation in
-Remark~\ref{rem:two-params}, there exists $\rho>0$ such that for every
+By Definition~\ref{def:ae}, there exists $\delta>0$ such that for every
 $f\in\F$ there is a measurable set $B_f\subset\R^n$ with
 \begin{equation}\label{eq:exceptional-size}
-    m(B_f)<\gamma
+    m(B_f)<\eps
 \end{equation}
 and
 \begin{equation}\label{eq:ae-control}
-    x_1,x_2\in\R^n\setminus B_f,\quad |x_1-x_2|<\rho
+    x_1,x_2\in\R^n\setminus B_f,\quad |x_1-x_2|<\delta
     \quad\Longrightarrow\quad
-    |f(x_1)-f(x_2)|<\eta .
+    |f(x_1)-f(x_2)|<\eps .
 \end{equation}
-Set $r:=\rho$. We will show that
+Set $r:=\delta$. We will show that
 \[
     \sup_{f\in\F}I(f,y)\le \eps^{*}
     \qquad\text{whenever } |y|<r.
@@ -188,14 +192,14 @@ By \eqref{eq:exceptional-size} and translation invariance,
     m(X(f,y))
     \le m(B_f)+m(B_f-y)
     =2m(B_f)
-    <2\gamma .
+    <2\eps .
 \end{equation}
 
 If $x\in R(f,y)$, then $x\notin B_f$ and $x\notin B_f-y$, hence
-$x+y\notin B_f$. Since $|x-(x+y)|=|y|<\rho$, the estimate
+$x+y\notin B_f$. Since $|x-(x+y)|=|y|<\delta$, the estimate
 \eqref{eq:ae-control} gives
 \begin{equation}\label{eq:regular-pointwise}
-    |f(x+y)-f(x)|<\eta
+    |f(x+y)-f(x)|<\eps
     \qquad (x\in R(f,y)).
 \end{equation}
 
@@ -220,21 +224,21 @@ $\min(a,1)\le a$ for $a\ge 0$ imply
 \[
 \begin{aligned}
     I_{\mathrm{reg}}(f,y)
-    &\le \eta\,m(R(f,y)) \\
-    &\le \eta\,m(E\cup(E-y)) \\
-    &\le 2\eta\,m(E) \\
-    &= \frac{\eps^{*}}{2},
+    &\le \eps\,m(R(f,y)) \\
+    &\le \eps\,m(E\cup(E-y)) \\
+    &\le 2\eps\,m(E) \\
+    &\le \frac{\eps^{*}}{2},
 \end{aligned}
 \]
-where the last equality follows from \eqref{eq:eta-gamma-choice}. On the
+where the last inequality follows from \eqref{eq:epsilon-choice}. On the
 exceptional region, the integrand is bounded by $1$, and therefore
 \[
 \begin{aligned}
     I_{\mathrm{exc}}(f,y)
     &\le m\bigl((E\cup(E-y))\cap X(f,y)\bigr) \\
     &\le m(X(f,y)) \\
-    &<2\gamma \\
-    &= \frac{\eps^{*}}{2}.
+    &<2\eps \\
+    &\le \frac{\eps^{*}}{2}.
 \end{aligned}
 \]
 Thus
@@ -271,11 +275,10 @@ The conclusion follows immediately from Theorem~\ref{thm:main}.
 \section{Remarks}
 
 \begin{remark}
-The proof uses the two-tolerance formulation from
-Remark~\ref{rem:two-params}. This does not introduce a stronger hypothesis:
-it is only a convenient way to assign separate roles to the two small
-quantities. The parameter $\eta$ controls the oscillation on the regular
-region, while $\gamma$ controls the measure of the exceptional region.
+The proof uses Definition~\ref{def:ae} in its one-parameter form. The choice
+in \eqref{eq:epsilon-choice} ensures that the same parameter $\eps$ is small
+enough for both estimates: it controls the oscillation on the regular region
+and the measure of the exceptional region.
 \end{remark}
 
 \begin{remark}
@@ -290,8 +293,8 @@ The finite-measure support assumption is used precisely in
 bounded by
 \[
     I_{\mathrm{reg}}(f,y)
-    \le \eta\,m(E\cup(E-y))
-    \le 2\eta\,m(E).
+    \le \eps\,m(E\cup(E-y))
+    \le 2\eps\,m(E).
 \]
 Without such a finite-measure localization, the regular-region estimate need
 not be useful.
