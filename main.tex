@@ -6,6 +6,7 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{geometry}
 \usepackage{microtype}
+\usepackage{enumitem}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \geometry{margin=1in}
 
@@ -123,9 +124,10 @@ Theorem~\ref{thm:main} below uses Definition~\ref{def:ae} directly.
 \begin{theorem}\label{thm:main}
 Let $E\subset\R^n$ be measurable with $m(E)<\infty$, and let $\F$ be a family
 of real-valued measurable functions on $\R^n$. Assume that:
-\begin{enumerate}
-    \item[\textup{(H1)}] $f(x)=0$ for every $x\notin E$ and every $f\in\F$;
-    \item[\textup{(H2)}] $\F$ is almost equicontinuous.
+\begin{enumerate}[label=\textup{(H\arabic*)},ref=H\arabic*]
+    \item\label{hyp:support} $f(x)=0$ for every $x\notin E$ and every
+    $f\in\F$;
+    \item\label{hyp:ae} $\F$ is almost equicontinuous.
 \end{enumerate}
 Then $\F$ satisfies the truncated translation condition in the sense of
 Definition~\ref{def:translation}; that is,
@@ -165,10 +167,11 @@ For $f\in\F$ and $y\in\R^n$, define
 We prove that $I(f,y)$ tends to zero as $y\to 0$, uniformly with respect to
 $f\in\F$.
 
-If $m(E)=0$, then (H1) implies that every $f\in\F$ is zero almost everywhere.
-By translation invariance, $f(\cdot+y)$ is also zero almost everywhere for
-every $y\in\R^n$. Hence $I(f,y)=0$ for all $f\in\F$ and all $y\in\R^n$, and
-the conclusion is immediate. We therefore assume that
+If $m(E)=0$, then hypothesis~\ref{hyp:support} implies that every
+$f\in\F$ is zero almost everywhere. By translation invariance,
+$f(\cdot+y)$ is also zero almost everywhere for every $y\in\R^n$. Hence
+$I(f,y)=0$ for all $f\in\F$ and all $y\in\R^n$, and the conclusion is
+immediate. We therefore assume that
 \[
     0<m(E)<\infty.
 \]
@@ -187,8 +190,9 @@ By Lemma~\ref{lem:symdiff}, there exists $r_0>0$ such that
     \quad\Longrightarrow\quad
     m\bigl(E\triangle(E-y)\bigr)<\frac{\alpha}{3}.
 \end{equation}
-By Definition~\ref{def:ae}, there exists $\delta>0$ such that for every
-$f\in\F$ there is a measurable set $B_f\subset\R^n$ with
+By hypothesis~\ref{hyp:ae} and Definition~\ref{def:ae}, there exists
+$\delta>0$ such that for every $f\in\F$ there is a measurable set
+$B_f\subset\R^n$ with
 \begin{equation}\label{eq:exceptional-size}
     m(B_f)<\eps
 \end{equation}
@@ -205,9 +209,9 @@ Set $r:=\min\{r_0,\delta\}$. We will show that
 \]
 
 Fix $y\in\R^n$ with $|y|<r$ and fix $f\in\F$. If
-$x\notin E\cup(E-y)$, then both $x$ and $x+y$ lie outside $E$. By (H1),
-$f(x)=f(x+y)=0$. Therefore the integrand in $I(f,y)$ is supported in
-$E\cup(E-y)$, and so
+$x\notin E\cup(E-y)$, then both $x$ and $x+y$ lie outside $E$. By
+hypothesis~\ref{hyp:support}, $f(x)=f(x+y)=0$. Therefore the integrand in
+$I(f,y)$ is supported in $E\cup(E-y)$, and so
 \begin{equation}\label{eq:localization}
     I(f,y)
     =
