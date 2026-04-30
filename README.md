@@ -1,8 +1,8 @@
-# Almost Equicontinuity and Translation Conditions
+# Almost Equicontinuity Implies the Translation Condition
 
-This folder contains a LaTeX paper draft about almost equicontinuity,
-truncated translation conditions, and compactness in asymptotic \(L^p\)
-spaces.
+This folder contains a LaTeX note proving that almost equicontinuity implies
+the truncated translation condition for families supported in a fixed
+finite-measure set.
 
 ## Files
 
