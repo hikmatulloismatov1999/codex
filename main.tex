@@ -40,11 +40,12 @@ We prove that a family of measurable functions supported in a fixed
 finite-measure set satisfies the truncated translation condition whenever it is
 almost equicontinuous. We also show by a bounded smooth example on $\R$ that
 the finite-measure support hypothesis cannot simply be removed, and we record
-a replacement result under a uniform tail-support condition. The proof
-separates the finite-measure estimate into three
-contributions: a symmetric-difference part controlled by translation
-continuity of finite-measure sets, a regular part controlled by almost
-equicontinuity, and an exceptional part controlled by the truncation.
+a replacement result under a uniform tail-support condition. In the opposite
+direction, we prove that the interior truncated translation condition implies
+almost equicontinuity on finite-measure domains. The forward proof separates
+the estimate into a symmetric-difference part, a regular part, and an
+exceptional part, while the converse uses a cube decomposition and a
+bad-pair counting argument.
 \end{abstract}
 
 \section{Introduction}
@@ -74,7 +75,7 @@ measure. Finally, after two examples related to the converse direction, we
 prove in Theorem~\ref{thm:converse} that the interior truncated translation
 condition implies almost equicontinuity on a finite-measure domain.
 
-\section{Definitions and statement}
+\section{Preliminaries and first theorem}
 
 Throughout, $\meas{A}$ denotes the Lebesgue measure of a measurable set
 $A\subset\R^n$, and all functions are Lebesgue measurable. For
@@ -122,7 +123,7 @@ and such that
 \]
 \end{definition}
 
-\begin{theorem}\label{thm:main}
+\begin{theorem}[finite-measure forward implication]\label{thm:main}
 Let $E\subset\R^n$ be measurable with $\meas{E}<\infty$, and let $\F$ be a
 family of real-valued measurable functions on $\R^n$. Assume that:
 \begin{enumerate}[label=\textup{(H\arabic*)},ref=\textup{(H\arabic*)}]
@@ -176,7 +177,7 @@ $\meas{Q\triangle(Q-y)}<\eta/3$, and consequently
 \]
 \end{proof}
 
-\section{Proof}
+\section{Proof of the finite-measure forward implication}
 
 \begin{proof}
 For $f\in\F$ and $y\in\R^n$, set
@@ -361,7 +362,7 @@ finite-measure support hypothesis is removed.
 
 \section{A uniform tail version}
 
-\begin{theorem}\label{thm:tail}
+\begin{theorem}[uniform tail version]\label{thm:tail}
 Let $\F$ be a family of real-valued measurable functions on $\R^n$. Assume
 that:
 \begin{enumerate}[label=\textup{(T\arabic*)},ref=\textup{(T\arabic*)}]
@@ -724,7 +725,7 @@ $a=\eps/2$, we have
     |f_s(x)-f_s(z)|\ge\eps/2\}}
     \ge \frac{\beta_Q^2}{2}.
 \]
-Using Cauchy's inequality, the counting bound for cubes meeting $K$, and
+Using the Cauchy--Schwarz inequality, the counting bound for cubes meeting $K$, and
 \eqref{eq:beta-sum}, we obtain a constant $c_1>0$, independent of $s$, such
 that
 \begin{equation}\label{eq:bad-pairs}
@@ -771,9 +772,10 @@ infinite-measure tails are both present.
 \section{Remarks}
 
 \begin{remark}
-The finite-measure support assumption is used in two places. First, it implies
-the symmetric-difference convergence in Lemma~\ref{lem:symdiff}. Second, it
-controls the regular part of the intersection by
+In Theorem~\ref{thm:main}, the finite-measure support assumption is used in
+two places. First, it implies the symmetric-difference convergence in
+Lemma~\ref{lem:symdiff}. Second, it controls the regular part of the
+intersection by
 \[
     \eps\,\meas{E}.
 \]
@@ -783,6 +785,23 @@ controls the regular part of the intersection by
 The truncation $\min(\cdot,1)$ is used only on the symmetric-difference and
 exceptional parts. No pointwise bound or uniform $L^p$ bound on the family is
 needed for those estimates.
+\end{remark}
+
+\begin{remark}
+The uniform tail condition in Theorem~\ref{thm:tail} is the natural
+replacement for finite support in the infinite-measure setting. It plays the
+same structural role as tightness in the Kolmogorov--Riesz compactness
+criterion: after a large ball is chosen, the remaining mass is uniformly
+small and the finite-measure argument can be applied inside the ball.
+\end{remark}
+
+\begin{remark}
+The converse theorem, Theorem~\ref{thm:converse}, is not a formal reversal of
+Theorem~\ref{thm:main}. The translation condition is an averaged condition,
+whereas almost equicontinuity excludes all nearby bad pairs outside a small
+exceptional set. The cube decomposition and bad-pair counting argument are
+precisely what convert averaged information into a uniform exceptional-set
+statement on finite-measure domains.
 \end{remark}
 
 \begin{thebibliography}{9}
