@@ -70,9 +70,9 @@ cosmetic: even a singleton family consisting of one bounded smooth function on
 $\R$ may fail the truncated translation condition. Third,
 Theorem~\ref{thm:tail} proves that the same conclusion remains valid on
 infinite-measure domains if the supports of the family are uniformly tight in
-measure. Finally, we record two examples related to the converse direction,
-where one asks whether the truncated translation condition forces almost
-equicontinuity.
+measure. Finally, after two examples related to the converse direction, we
+prove in Theorem~\ref{thm:converse} that the interior truncated translation
+condition implies almost equicontinuity on a finite-measure domain.
 
 \section{Definitions and statement}
 
@@ -485,12 +485,12 @@ The estimate is independent of $a$, and therefore
 \]
 
 We now verify almost equicontinuity. Given $\eps>0$, choose
-$\rho>0$ so small that $4\rho<\eps$, and set $\delta:=\rho$. For
-$f_a\in\F$, define
+$\rho>0$ so small that $\rho<1/4$ and $4\rho<\eps$, and set
+$\delta:=\rho$. For $f_a\in\F$, define
 \[
     B_a:=(a-\rho,a+\rho)\cup(a+1-\rho,a+1+\rho).
 \]
-Then $\meas{B_a}=4\rho<\eps$. If $x,z\in\R\setminus B_a$ and
+Then $\meas{B_a}\le4\rho<\eps$. If $x,z\in\R\setminus B_a$ and
 $|x-z|<\delta$, then the two points cannot lie on opposite sides of either
 endpoint $a$ or $a+1$. Thus $f_a(x)=f_a(z)$, and hence
 $|f_a(x)-f_a(z)|=0<\eps$.
@@ -520,8 +520,8 @@ $1/n<\delta$. In each interval
 the function $f_n$ is equal to $1$ on the left half and $0$ on the right half.
 If a measurable set $B\subset\R$ satisfies the almost-equicontinuity
 implication for $f_n$ at scale $\delta$ and accuracy $\eps_0$, then $B$ must
-contain one of the two half-intervals in each $I_{n,k}$, up to null sets.
-Otherwise there would be points $x,z\in I_{n,k}\setminus B$ in opposite
+contain one of the two half-intervals in each $I_{n,k}$. Otherwise there
+would be points $x,z\in I_{n,k}\setminus B$ in opposite
 halves, and then $|x-z|<1/n<\delta$ while $|f_n(x)-f_n(z)|=1$.
 Consequently,
 \[
@@ -534,11 +534,11 @@ than $\eps_0=1/2$. Therefore $\F$ is not almost equicontinuous.
 
 The same oscillation also violates the truncated translation condition. Let
 $y_n:=1/(2n)$. Then $y_n\to0$, and for every
-$x\in(0,1-y_n)$ the points $x$ and $x+y_n$ lie in opposite halves of adjacent
-or identical subintervals. Hence
+$x\in(0,1-y_n)$, except for finitely many endpoints, the points $x$ and
+$x+y_n$ lie in opposite halves of adjacent or identical subintervals. Hence
 \[
     |f_n(x+y_n)-f_n(x)|=1
-    \qquad (0<x<1-y_n).
+    \qquad\text{for a.e. }x\in(0,1-y_n).
 \]
 It follows that
 \[
@@ -551,11 +551,201 @@ It follows that
 Since $1-y_n\to1$, the truncated translation condition cannot hold.
 \end{proof}
 
+\section{A finite-measure converse on the domain}
+
+We now prove a converse statement for functions defined on a common
+finite-measure set. In this formulation only pairs of points that remain in
+the domain are tested, so the natural translation condition is
+\[
+    \lim_{|y|\to0}\sup_{f\in\F}
+    \int_{E\cap(E-y)}
+    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0.
+\]
+Here almost equicontinuity on $E$ means Definition~\ref{def:ae} with
+$\R^n$ replaced by $E$.
+
+\begin{lemma}\label{lem:bad-measure-from-translation}
+Let $E\subset\R^n$ be measurable, and let $\F$ be a family of real-valued
+measurable functions on $E$. If
+\[
+    \lim_{|y|\to0}\sup_{f\in\F}
+    \int_{E\cap(E-y)}
+    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0,
+\]
+then, for every $0<a\le1$,
+\[
+    \lim_{|y|\to0}\sup_{f\in\F}
+    \meas{\{x\in E\cap(E-y): |f(x+y)-f(x)|\ge a\}}=0.
+\]
+\end{lemma}
+
+\begin{proof}
+On the set where $|f(x+y)-f(x)|\ge a$, the truncated integrand is at least
+$a$. Hence
+\[
+    a\,\meas{\{x\in E\cap(E-y): |f(x+y)-f(x)|\ge a\}}
+    \le
+    \int_{E\cap(E-y)}
+    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx .
+\]
+Taking the supremum over $f\in\F$ and letting $y\to0$ proves the claim.
+\end{proof}
+
+\begin{lemma}[separated values]\label{lem:separated-values}
+Let $A$ be a measurable set of finite measure, let $u:A\to\R$ be measurable,
+and let $a>0$. Suppose that one must remove measure at least $\beta$ from
+$A$ in order to make the remaining values of $u$ lie in an interval of length
+$a$. Then
+\[
+    \meas{\{(x,z)\in A\times A: |u(x)-u(z)|\ge a\}}
+    \ge \frac{\beta^2}{2}.
+\]
+\end{lemma}
+
+\begin{proof}
+If $\beta=0$, the assertion is trivial. Assume $\beta>0$. Let $\nu$ be the
+push-forward of Lebesgue measure on $A$ under $u$. By hypothesis, every
+closed interval in $\R$ of length $a$ misses $\nu$-measure at least $\beta$.
+Choose
+\[
+    t:=\inf\{r\in\R:\nu((-\infty,r])\ge\beta/2\}.
+\]
+Then $\nu((-\infty,t])\ge\beta/2$ and
+$\nu((-\infty,t))\le\beta/2$. If
+$\nu((t+a,\infty))<\beta/2$, then
+\[
+    \nu(\R\setminus[t,t+a])
+    =
+    \nu((-\infty,t))+\nu((t+a,\infty))
+    <\beta,
+\]
+which contradicts the preceding paragraph. Hence both separated tails
+$(-\infty,t]$ and $(t+a,\infty)$ have $\nu$-measure at least $\beta/2$.
+Pairs chosen from these two tails have values separated by at least $a$, and
+therefore the bad set in $A\times A$ has measure at least
+\[
+    2\cdot\frac{\beta}{2}\cdot\frac{\beta}{2}
+    =\frac{\beta^2}{2}.
+\]
+\end{proof}
+
+\begin{lemma}[shifted cubes]\label{lem:shifted-cubes}
+For each $s>0$ there are $3^n$ shifted grids of closed cubes of side length
+$s$ with the following property: if $x,z\in\R^n$ and
+$|x-z|<s/(3\sqrt n)$, then $x$ and $z$ belong to a common cube of one of
+the grids.
+\end{lemma}
+
+\begin{proof}
+In one dimension, the three grids
+\[
+    \{[ks+js/3,(k+1)s+js/3]:k\in\mathbb Z\},
+    \qquad j=0,1,2,
+\]
+have the property that every interval of length less than $s/3$ is contained
+in some interval from one of the three grids. Taking products of these three
+one-dimensional grids gives $3^n$ grids in $\R^n$. If
+$|x-z|<s/(3\sqrt n)$, then each coordinate difference is less than $s/3$,
+and the one-dimensional assertion applies coordinate by coordinate.
+\end{proof}
+
+\begin{theorem}[finite-measure converse]\label{thm:converse}
+Let $E\subset\R^n$ be measurable with $\meas{E}<\infty$, and let $\F$ be a
+family of real-valued measurable functions on $E$. Assume that
+\[
+    \lim_{|y|\to0}\sup_{f\in\F}
+    \int_{E\cap(E-y)}
+    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0.
+\]
+Then $\F$ is almost equicontinuous on $E$.
+\end{theorem}
+
+\begin{proof}
+We argue by contradiction. Suppose that $\F$ is not almost equicontinuous on
+$E$. Then there exists an accuracy $0<\eps\le1$ such that, for every
+$\delta>0$, one can find $f\in\F$ for which no measurable set
+$B\subset E$ with $\meas{B}<\eps$ has the property
+\[
+    x,z\in E\setminus B,\quad |x-z|<\delta
+    \quad\Longrightarrow\quad
+    |f(x)-f(z)|<\eps .
+\]
+
+Choose a compact set $K\subset E$ such that
+$\meas{E\setminus K}<\eps/4$. Fix $0<s\le1$, and let
+$\mathcal G_1,\dots,\mathcal G_{3^n}$ be the shifted grids from
+Lemma~\ref{lem:shifted-cubes}. Since $K$ is compact, the total number of
+cubes from these grids that meet $K$ is at most $C_Ks^{-n}$, where $C_K$ is
+independent of $s$.
+
+Set $\delta_s:=s/(3\sqrt n)$, and choose $f_s\in\F$ witnessing the failure
+of almost equicontinuity at scale $\delta_s$. For a cube $Q$, let
+$\beta_Q$ be the infimum of $\meas{C}$ over all measurable
+$C\subset K\cap Q$ such that the values of $f_s$ on
+$(K\cap Q)\setminus C$ lie in some interval of length $\eps/2$.
+
+The sum of these local quantities over all shifted grids is at least
+$3\eps/4$. Indeed, if the sum were smaller, then after choosing local
+exceptional sets with total measure still below $3\eps/4$ and adding
+$E\setminus K$, one would obtain a set $B\subset E$ with $\meas{B}<\eps$.
+Whenever $x,z\in E\setminus B$ and $|x-z|<\delta_s$,
+Lemma~\ref{lem:shifted-cubes} puts $x$ and $z$ in a common cube of one
+shifted grid. On that cube the remaining values of $f_s$ lie in an interval
+of length $\eps/2$, so $|f_s(x)-f_s(z)|<\eps$, a contradiction. Thus
+\begin{equation}\label{eq:beta-sum}
+    \sum_{i=1}^{3^n}\sum_{Q\in\mathcal G_i}\beta_Q
+    \ge \frac{3\eps}{4}.
+\end{equation}
+
+By Lemma~\ref{lem:separated-values}, applied on $K\cap Q$ with
+$a=\eps/2$, we have
+\[
+    \meas{\{(x,z)\in(K\cap Q)^2:
+    |f_s(x)-f_s(z)|\ge\eps/2\}}
+    \ge \frac{\beta_Q^2}{2}.
+\]
+Using Cauchy's inequality, the counting bound for cubes meeting $K$, and
+\eqref{eq:beta-sum}, we obtain a constant $c_1>0$, independent of $s$, such
+that
+\begin{equation}\label{eq:bad-pairs}
+    \sum_{i=1}^{3^n}\sum_{Q\in\mathcal G_i}
+    \meas{\{(x,z)\in(K\cap Q)^2:
+    |f_s(x)-f_s(z)|\ge\eps/2\}}
+    \ge c_1s^n .
+\end{equation}
+
+If two points lie in a common cube of side length $s$, then their distance is
+at most $\sqrt n\,s$. Conversely, the number of cubes, among all the shifted
+grids, that can contain a fixed pair of points is bounded by a constant
+depending only on $n$. Thus, after absorbing this bounded overlap into the
+constant, writing $z=x+y$, and using Fubini's theorem,
+\eqref{eq:bad-pairs} implies
+\[
+    \int_{|y|\le\sqrt n\,s}
+    \meas{\{x\in E\cap(E-y):
+    |f_s(x+y)-f_s(x)|\ge\eps/2\}}\,dy
+    \ge c_2s^n
+\]
+for some constant $c_2>0$ independent of $s$. Since the ball
+$\{y:|y|\le\sqrt n\,s\}$ has measure comparable to $s^n$, there exists
+$y_s\in\R^n$ with $|y_s|\le\sqrt n\,s$ such that
+\begin{equation}\label{eq:bad-translation}
+    \meas{\{x\in E\cap(E-y_s):
+    |f_s(x+y_s)-f_s(x)|\ge\eps/2\}}\ge c_3
+\end{equation}
+for a constant $c_3>0$ independent of $s$.
+
+Letting $s\downarrow0$, we have $y_s\to0$. By
+Lemma~\ref{lem:bad-measure-from-translation}, the lower bound in
+\eqref{eq:bad-translation} contradicts the assumed translation condition.
+Therefore $\F$ must be almost equicontinuous on $E$.
+\end{proof}
+
 \begin{problem}\label{prob:converse}
-Find natural hypotheses under which the truncated translation condition
-implies almost equicontinuity. In particular, determine whether the implication
-holds for families supported in a common finite-measure set, or whether an
-additional compactness, tightness, or regularity hypothesis is required.
+Theorem~\ref{thm:converse} treats the interior translation condition on a
+finite-measure domain. A remaining question is to identify the best analogue
+for zero extensions on all of $\R^n$, especially when boundary effects and
+infinite-measure tails are both present.
 \end{problem}
 
 \section{Remarks}
