@@ -113,15 +113,35 @@ If $E\subset\R^n$ is measurable and $\meas{E}<\infty$, then
 \end{lemma}
 
 \begin{proof}
-Since $\meas{E}<\infty$, the indicator function $\mathbf{1}_E$ belongs to
-$L^1(\R^n)$. By the continuity of translations in $L^1$,
+Fix $\eta>0$. By regularity of Lebesgue measure, there exists a finite union
+of bounded rectangles $Q\subset\R^n$ such that
 \[
-    \int_{\R^n}\bigl|\mathbf{1}_E(x+y)-\mathbf{1}_E(x)\bigr|\,dx
-    \longrightarrow 0
-    \qquad (y\to 0).
+    \meas{E\triangle Q}<\frac{\eta}{3}.
 \]
-The integrand is the indicator of $E\triangle(E-y)$, and hence the integral is
-$\meas{E\triangle(E-y)}$.
+Since
+\[
+    E\triangle(E-y)
+    \subset (E\triangle Q)\cup\bigl(Q\triangle(Q-y)\bigr)
+    \cup\bigl((Q-y)\triangle(E-y)\bigr),
+\]
+translation invariance gives
+\[
+    \meas{E\triangle(E-y)}
+    \le 2\meas{E\triangle Q}+\meas{Q\triangle(Q-y)}.
+\]
+It remains only to note that
+\[
+    \meas{Q\triangle(Q-y)}\longrightarrow 0
+    \qquad (y\to0).
+\]
+Indeed, if $R=\prod_{j=1}^n(a_j,b_j)$ is a bounded rectangle, then
+$R\triangle(R-y)$ is contained in a union of slabs whose total measure tends
+to $0$ as $y\to0$. The same conclusion follows for a finite union of
+rectangles by subadditivity. Therefore, for all sufficiently small $|y|$, we have
+$\meas{Q\triangle(Q-y)}<\eta/3$, and consequently
+\[
+    \meas{E\triangle(E-y)}<\eta.
+\]
 \end{proof}
 
 \section{Proof}
