@@ -1,15 +1,23 @@
 \documentclass[11pt]{article}
 
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{geometry}
+\usepackage{microtype}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \geometry{margin=1in}
 
+\theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
-\newtheorem{definition}{Definition}
-\newtheorem{remark}{Remark}
 \newtheorem{corollary}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\F}{\mathcal{F}}
@@ -139,12 +147,12 @@ the conclusion is immediate. We therefore assume that
     0<m(E)<\infty.
 \]
 
-Let $\eps^{*}>0$ be given. Choose
+Let $\alpha>0$ be given. Choose
 \begin{equation}\label{eq:epsilon-choice}
     \eps:=
     \min\left\{
-        \frac{\eps^{*}}{4m(E)},
-        \frac{\eps^{*}}{4}
+        \frac{\alpha}{4m(E)},
+        \frac{\alpha}{4}
     \right\}.
 \end{equation}
 By Definition~\ref{def:ae}, there exists $\delta>0$ such that for every
@@ -160,12 +168,12 @@ and
 \end{equation}
 Set $r:=\delta$. We will show that
 \[
-    \sup_{f\in\F}I(f,y)\le \eps^{*}
+    \sup_{f\in\F}I(f,y)\le \alpha
     \qquad\text{whenever } |y|<r.
 \]
 
 Fix $y\in\R^n$ with $|y|<r$ and fix $f\in\F$. If
-$x\notin E\cup(E-y)$, then $x\notin E$ and $x+y\notin E$. By (H1),
+$x\notin E\cup(E-y)$, then both $x$ and $x+y$ lie outside $E$. By (H1),
 $f(x)=f(x+y)=0$. Therefore the integrand in $I(f,y)$ is supported in
 $E\cup(E-y)$, and so
 \begin{equation}\label{eq:localization}
@@ -195,9 +203,8 @@ By \eqref{eq:exceptional-size} and translation invariance,
     <2\eps .
 \end{equation}
 
-If $x\in R(f,y)$, then $x\notin B_f$ and $x\notin B_f-y$, hence
-$x+y\notin B_f$. Since $|x-(x+y)|=|y|<\delta$, the estimate
-\eqref{eq:ae-control} gives
+If $x\in R(f,y)$, then both $x$ and $x+y$ lie outside $B_f$. Since
+$|x-(x+y)|=|y|<\delta$, the estimate \eqref{eq:ae-control} gives
 \begin{equation}\label{eq:regular-pointwise}
     |f(x+y)-f(x)|<\eps
     \qquad (x\in R(f,y)).
@@ -222,38 +229,34 @@ and
 On the regular region, \eqref{eq:regular-pointwise} and the inequality
 $\min(a,1)\le a$ for $a\ge 0$ imply
 \[
-\begin{aligned}
     I_{\mathrm{reg}}(f,y)
-    &\le \eps\,m(R(f,y)) \\
-    &\le \eps\,m(E\cup(E-y)) \\
-    &\le 2\eps\,m(E) \\
-    &\le \frac{\eps^{*}}{2},
-\end{aligned}
+    \le \eps\,m(R(f,y))
+    \le 2\eps\,m(E)
+    \le \frac{\alpha}{2},
 \]
-where the last inequality follows from \eqref{eq:epsilon-choice}. On the
-exceptional region, the integrand is bounded by $1$, and therefore
+where we used \eqref{eq:support-size} and \eqref{eq:epsilon-choice}. On the
+exceptional region, the integrand is bounded by $1$, and \eqref{eq:X-size}
+gives
 \[
-\begin{aligned}
     I_{\mathrm{exc}}(f,y)
-    &\le m\bigl((E\cup(E-y))\cap X(f,y)\bigr) \\
-    &\le m(X(f,y)) \\
-    &<2\eps \\
-    &\le \frac{\eps^{*}}{2}.
-\end{aligned}
+    \le m(X(f,y))
+    <2\eps
+    \le \frac{\alpha}{2}.
 \]
-Thus
-\[
-    I(f,y)<\eps^{*}
-\]
-for every $f\in\F$ and every $|y|<r$. Taking the supremum over
-$f\in\F$ yields
+It follows that $I(f,y)<\alpha$ for every $f\in\F$ and every $|y|<r$.
+Taking the supremum over $f\in\F$ yields
 \[
     \sup_{f\in\F}I(f,y)
-    \le \eps^{*}
+    \le \alpha
     \qquad (|y|<r).
 \]
-Since $\eps^{*}>0$ was arbitrary, this is equivalent to the truncated
-translation condition in Definition~\ref{def:translation}.
+Given any $\beta>0$, applying the preceding argument with
+$\alpha=\beta/2$ gives, for the corresponding $r>0$,
+\[
+    \sup_{f\in\F}I(f,y)\le \frac{\beta}{2}<\beta
+    \qquad (|y|<r).
+\]
+This is precisely the limit in Definition~\ref{def:translation}.
 \end{proof}
 
 \begin{corollary}\label{cor:p-version}
