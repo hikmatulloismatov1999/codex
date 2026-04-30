@@ -105,6 +105,23 @@ and such that
 \]
 \end{definition}
 
+\begin{definition}[Almost equicontinuity on a set]\label{def:ae-domain}
+Let $E\subset\R^n$ be measurable, and let $\F$ be a family of real-valued
+measurable functions on $E$. We say that $\F$ is \emph{almost
+equicontinuous on $E$} if for every $\eps>0$ there exists $\delta>0$ such
+that, for every $f\in\F$, there is a measurable set $B_f\subset E$
+satisfying
+\[
+    \meas{B_f}<\eps,
+\]
+and such that
+\[
+    x_1,x_2\in E\setminus B_f,\quad |x_1-x_2|<\delta
+    \quad\Longrightarrow\quad
+    |f(x_1)-f(x_2)|<\eps .
+\]
+\end{definition}
+
 \begin{theorem}\label{thm:main}
 Let $E\subset\R^n$ be measurable with $\meas{E}<\infty$, and let $\F$ be a
 family of real-valued measurable functions on $\R^n$. Assume that:
@@ -561,8 +578,8 @@ the domain are tested, so the natural translation condition is
     \int_{E\cap(E-y)}
     \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0.
 \]
-Here almost equicontinuity on $E$ means Definition~\ref{def:ae} with
-$\R^n$ replaced by $E$.
+Here almost equicontinuity on $E$ is meant in the sense of
+Definition~\ref{def:ae-domain}.
 
 \begin{lemma}\label{lem:bad-measure-from-translation}
 Let $E\subset\R^n$ be measurable, and let $\F$ be a family of real-valued
@@ -657,7 +674,8 @@ family of real-valued measurable functions on $E$. Assume that
     \int_{E\cap(E-y)}
     \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0.
 \]
-Then $\F$ is almost equicontinuous on $E$.
+Then $\F$ is almost equicontinuous on $E$ in the sense of
+Definition~\ref{def:ae-domain}.
 \end{theorem}
 
 \begin{proof}
@@ -686,8 +704,10 @@ $(K\cap Q)\setminus C$ lie in some interval of length $\eps/2$.
 
 The sum of these local quantities over all shifted grids is at least
 $3\eps/4$. Indeed, if the sum were smaller, then after choosing local
-exceptional sets with total measure still below $3\eps/4$ and adding
-$E\setminus K$, one would obtain a set $B\subset E$ with $\meas{B}<\eps$.
+exceptional sets whose measures are arbitrarily close to the corresponding
+infima, the total local exceptional measure would still be below
+$3\eps/4$. Adding $E\setminus K$, one would obtain a set $B\subset E$ with
+$\meas{B}<\eps$.
 Whenever $x,z\in E\setminus B$ and $|x-z|<\delta_s$,
 Lemma~\ref{lem:shifted-cubes} puts $x$ and $z$ in a common cube of one
 shifted grid. On that cube the remaining values of $f_s$ lie in an interval
@@ -715,10 +735,10 @@ that
 \end{equation}
 
 If two points lie in a common cube of side length $s$, then their distance is
-at most $\sqrt n\,s$. Conversely, the number of cubes, among all the shifted
-grids, that can contain a fixed pair of points is bounded by a constant
-depending only on $n$. Thus, after absorbing this bounded overlap into the
-constant, writing $z=x+y$, and using Fubini's theorem,
+at most $\sqrt n\,s$. Conversely, a fixed pair of points can belong to
+$(K\cap Q)^2$ for only boundedly many cubes $Q$ among all the shifted grids;
+the bound depends only on $n$. Thus, after absorbing this bounded overlap
+into the constant, writing $z=x+y$, and using Fubini's theorem,
 \eqref{eq:bad-pairs} implies
 \[
     \int_{|y|\le\sqrt n\,s}
