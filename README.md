@@ -1,7 +1,7 @@
 # Almost Equicontinuity Implies the Translation Condition
 
-This folder contains a LaTeX note proving that almost equicontinuity implies
-the truncated translation condition for families supported in a fixed
+This folder contains a polished LaTeX note proving that almost equicontinuity
+implies the truncated translation condition for families supported in a fixed
 finite-measure set.
 
 ## Files

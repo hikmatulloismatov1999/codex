@@ -8,6 +8,11 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
 \newtheorem{remark}{Remark}
+\newtheorem{corollary}{Corollary}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\eps}{\varepsilon}
 
 \title{Almost Equicontinuity Implies the Translation Condition}
 \author{Hikmatullo Ismatov}
@@ -17,254 +22,260 @@
 
 \maketitle
 
-\section{Definition and statement}
+\begin{abstract}
+We prove that a family of measurable functions supported in a fixed
+finite-measure set satisfies the truncated translation condition whenever it is
+almost equicontinuous. The proof is elementary and separates the estimate into
+two parts: a regular region, where almost equicontinuity gives pointwise
+control, and an exceptional region, whose contribution is controlled by the
+truncation.
+\end{abstract}
 
-Throughout, $m$ denotes Lebesgue measure on $\mathbb{R}^n$, and all functions
-are Lebesgue measurable. For $A\subset\mathbb{R}^n$ and
-$y\in\mathbb{R}^n$, write
+\section{Definitions and statement}
+
+Throughout, $m$ denotes Lebesgue measure on $\R^n$, and all functions are
+Lebesgue measurable. For a measurable set $A\subset\R^n$ and
+$y\in\R^n$, we write
 \[
-    A-y := \{x\in\mathbb{R}^n : x+y\in A\}.
+    A-y:=\{x\in\R^n:x+y\in A\}.
 \]
-The set $A-y$ is measurable whenever $A$ is measurable, and
-$m(A-y)=m(A)$ by translation invariance of Lebesgue measure.
+By translation invariance of Lebesgue measure, $A-y$ is measurable and
+$m(A-y)=m(A)$.
 
 \begin{definition}[Almost equicontinuity]\label{def:ae}
-Let $\mathcal{F}$ be a family of real-valued measurable functions on
-$\mathbb{R}^n$. We say that $\mathcal{F}$ is \emph{almost equicontinuous} if
+Let $\F$ be a family of real-valued measurable functions on $\R^n$. We say
+that $\F$ is \emph{almost equicontinuous} if for every $\eps>0$ there exists
+$\delta>0$ such that, for every $f\in\F$, there is a measurable set
+$B_f\subset\R^n$ satisfying
 \[
-    \forall \varepsilon>0\;\; \exists \delta>0\;\;
-    \forall f\in\mathcal{F}\;\;
-    \exists B_f\subset\mathbb{R}^n \text{ measurable}
+    m(B_f)<\eps,
 \]
-such that
+and such that
 \[
-    m(B_f)<\varepsilon,
-\]
-and
-\[
-    x_1,x_2\in\mathbb{R}^n\setminus B_f,\quad |x_1-x_2|<\delta
+    x_1,x_2\in\R^n\setminus B_f,\quad |x_1-x_2|<\delta
     \quad\Longrightarrow\quad
-    |f(x_1)-f(x_2)|<\varepsilon.
+    |f(x_1)-f(x_2)|<\eps .
+\]
+\end{definition}
+
+\begin{definition}[Truncated translation condition]\label{def:translation}
+Let $\F$ be a family of measurable functions on $\R^n$. We say that $\F$
+satisfies the \emph{truncated translation condition} if
+\[
+    \lim_{|y|\to 0}\sup_{f\in\F}
+    \int_{\R^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0.
 \]
 \end{definition}
 
 \begin{remark}[Equivalent two-tolerance formulation]\label{rem:two-params}
-Definition~\ref{def:ae} is equivalent to the following formulation: for every
-$\eta>0$ and every $\gamma>0$, there exists $\rho>0$ such that for every
-$f\in\mathcal{F}$ there is a measurable set $B_f\subset\mathbb{R}^n$ with
-$m(B_f)<\gamma$ and
+Definition~\ref{def:ae} is equivalent to the following two-tolerance
+formulation: for every $\eta>0$ and every $\gamma>0$, there exists $\rho>0$
+such that, for every $f\in\F$, there is a measurable set $B_f\subset\R^n$
+with $m(B_f)<\gamma$ and
 \[
-    x_1,x_2\in\mathbb{R}^n\setminus B_f,\quad |x_1-x_2|<\rho
+    x_1,x_2\in\R^n\setminus B_f,\quad |x_1-x_2|<\rho
     \quad\Longrightarrow\quad
-    |f(x_1)-f(x_2)|<\eta.
+    |f(x_1)-f(x_2)|<\eta .
 \]
-Indeed, the one-parameter definition implies this statement by applying
-Definition~\ref{def:ae} with
-\[
-    \varepsilon:=\min(\eta,\gamma).
-\]
-Then $m(B_f)<\varepsilon\le \gamma$ and the oscillation is bounded by
-$\varepsilon\le \eta$. Conversely, taking $\eta=\gamma=\varepsilon$ gives the
-one-parameter definition.
-
-In the proof below we use the one-parameter definition directly, choosing the
-single parameter small enough to control both the measure of $B_f$ and the
-oscillation of $f$ on $\mathbb{R}^n\setminus B_f$.
+Indeed, Definition~\ref{def:ae} implies this statement by applying it with
+$\eps=\min\{\eta,\gamma\}$. The resulting exceptional set satisfies
+$m(B_f)<\eps\le\gamma$, and the oscillation is bounded by
+$\eps\le\eta$. Conversely, taking $\eta=\gamma=\eps$ gives
+Definition~\ref{def:ae}.
 \end{remark}
 
 \begin{theorem}\label{thm:main}
-Let $E\subset\mathbb{R}^n$ be a measurable set with $m(E)<\infty$, and let
-$\mathcal{F}$ be a family of real-valued measurable functions on
-$\mathbb{R}^n$ such that:
+Let $E\subset\R^n$ be measurable with $m(E)<\infty$, and let $\F$ be a family
+of real-valued measurable functions on $\R^n$. Assume that:
 \begin{enumerate}
-    \item[\textup{(H1)}] $f(x)=0$ for every $x\notin E$ and every
-    $f\in\mathcal{F}$;
-    \item[\textup{(H2)}] $\mathcal{F}$ is almost equicontinuous in the sense of
-    Definition~\ref{def:ae}.
+    \item[\textup{(H1)}] $f(x)=0$ for every $x\notin E$ and every $f\in\F$;
+    \item[\textup{(H2)}] $\F$ is almost equicontinuous.
 \end{enumerate}
-Then
+Then $\F$ satisfies the truncated translation condition; that is,
 \[
-    \lim_{|y|\to 0}\;\sup_{f\in\mathcal{F}}
-    \int_{\mathbb{R}^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx = 0.
-\]
-Equivalently, for every $\varepsilon^{*}>0$ there exists $r>0$ such that for
-every $|y|<r$,
-\[
-    \sup_{f\in\mathcal{F}}
-    \int_{\mathbb{R}^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx
-    < \varepsilon^{*}.
+    \lim_{|y|\to 0}\sup_{f\in\F}
+    \int_{\R^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0.
 \]
 \end{theorem}
 
 \section{Proof}
 
 \begin{proof}
-For $f\in\mathcal{F}$ and $y\in\mathbb{R}^n$, set
+For $f\in\F$ and $y\in\R^n$, define
 \[
     I(f,y):=
-    \int_{\mathbb{R}^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx.
+    \int_{\R^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx .
 \]
-We prove that $I(f,y)$ is small uniformly in $f$ when $|y|$ is small.
+We prove that $I(f,y)$ tends to zero as $y\to 0$, uniformly with respect to
+$f\in\F$.
 
-\medskip
-\noindent\textbf{The null-support case.}
-Suppose first that $m(E)=0$. By (H1), $\{f\neq 0\}\subset E$ for every
-$f\in\mathcal{F}$, so $f=0$ almost everywhere. By translation invariance,
-$f(\cdot+y)=0$ almost everywhere as well. Hence $I(f,y)=0$ for every
-$f\in\mathcal{F}$ and every $y\in\mathbb{R}^n$. Thus the conclusion holds with
-any $r>0$. We now assume $m(E)>0$.
+If $m(E)=0$, then (H1) implies that every $f\in\F$ is zero almost everywhere.
+By translation invariance, $f(\cdot+y)$ is also zero almost everywhere for
+every $y\in\R^n$. Hence $I(f,y)=0$ for all $f\in\F$ and all $y\in\R^n$, and
+the conclusion is immediate. We therefore assume that
+\[
+    0<m(E)<\infty.
+\]
 
-\medskip
-\noindent\textbf{Choice of parameters.}
-Fix $\varepsilon^{*}>0$. We use $\varepsilon^{*}$ for the target accuracy in
-the conclusion and reserve $\varepsilon$ for the parameter in
-Definition~\ref{def:ae}. Choose
-\begin{equation}\label{eq:choice-eps}
-    \varepsilon :=
-    \min\left\{\frac{\varepsilon^{*}}{8m(E)},\frac{\varepsilon^{*}}{8}\right\}.
+Let $\eps^{*}>0$ be given. Choose
+\begin{equation}\label{eq:eta-gamma-choice}
+    \eta:=\frac{\eps^{*}}{8m(E)},
+    \qquad
+    \gamma:=\frac{\eps^{*}}{8}.
 \end{equation}
-This number is positive because $0<m(E)<\infty$. By
-Definition~\ref{def:ae}, there exists $\delta>0$ such that for every
-$f\in\mathcal{F}$ there is a measurable set $B_f\subset\mathbb{R}^n$ with
-\begin{equation}\label{eq:Bf-bound}
-    m(B_f)<\varepsilon
+By the equivalent two-tolerance formulation in
+Remark~\ref{rem:two-params}, there exists $\rho>0$ such that for every
+$f\in\F$ there is a measurable set $B_f\subset\R^n$ with
+\begin{equation}\label{eq:exceptional-size}
+    m(B_f)<\gamma
 \end{equation}
 and
-\begin{equation}\label{eq:ae-implication}
-    x_1,x_2\in\mathbb{R}^n\setminus B_f,\quad |x_1-x_2|<\delta
+\begin{equation}\label{eq:ae-control}
+    x_1,x_2\in\R^n\setminus B_f,\quad |x_1-x_2|<\rho
     \quad\Longrightarrow\quad
-    |f(x_1)-f(x_2)|<\varepsilon.
+    |f(x_1)-f(x_2)|<\eta .
 \end{equation}
-Set $r:=\delta$. We will show that
+Set $r:=\rho$. We will show that
 \[
-    \sup_{f\in\mathcal{F}} I(f,y)<\varepsilon^{*}
-    \quad\text{whenever } |y|<r.
+    \sup_{f\in\F}I(f,y)<\eps^{*}
+    \qquad\text{whenever } |y|<r.
 \]
 
-Fix $f\in\mathcal{F}$ and $y\in\mathbb{R}^n$ with $|y|<r=\delta$. The case
-$y=0$ is immediate, so the following estimates also cover all nonzero
-$y$ with $|y|<r$.
-
-\medskip
-\noindent\textbf{Localization of the integrand.}
-The integrand vanishes outside $E\cup(E-y)$. Indeed, if
+Fix $y\in\R^n$ with $|y|<r$ and fix $f\in\F$. If
 $x\notin E\cup(E-y)$, then $x\notin E$ and $x+y\notin E$. By (H1),
-$f(x)=0$ and $f(x+y)=0$. Therefore
-\begin{equation}\label{eq:localized}
-    I(f,y)=
+$f(x)=f(x+y)=0$. Therefore the integrand in $I(f,y)$ is supported in
+$E\cup(E-y)$, and so
+\begin{equation}\label{eq:localization}
+    I(f,y)
+    =
     \int_{E\cup(E-y)}
-    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx.
+    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx .
 \end{equation}
 Moreover,
-\begin{equation}\label{eq:E-size}
+\begin{equation}\label{eq:support-size}
     m(E\cup(E-y))\le m(E)+m(E-y)=2m(E).
 \end{equation}
 
-\medskip
-\noindent\textbf{Good and bad regions.}
-Define
+Define the exceptional region associated with $f$ and $y$ by
 \[
-    \operatorname{Bad}(f,y):=B_f\cup(B_f-y),
-    \qquad
-    G(f,y):=(E\cup(E-y))\setminus \operatorname{Bad}(f,y).
+    X(f,y):=B_f\cup(B_f-y),
 \]
-By translation invariance and subadditivity,
-\begin{equation}\label{eq:bad-size}
-    m(\operatorname{Bad}(f,y))
+and define the regular region by
+\[
+    R(f,y):=(E\cup(E-y))\setminus X(f,y).
+\]
+By \eqref{eq:exceptional-size} and translation invariance,
+\begin{equation}\label{eq:X-size}
+    m(X(f,y))
     \le m(B_f)+m(B_f-y)
     =2m(B_f)
-    <2\varepsilon.
+    <2\gamma .
 \end{equation}
 
-If $x\in G(f,y)$, then $x\notin B_f$ and $x\notin B_f-y$, hence
-$x+y\notin B_f$. Since $|x-(x+y)|=|y|<\delta$, \eqref{eq:ae-implication}
-gives
-\begin{equation}\label{eq:pointwise}
-    |f(x+y)-f(x)|<\varepsilon
-    \qquad (x\in G(f,y)).
+If $x\in R(f,y)$, then $x\notin B_f$ and $x\notin B_f-y$, hence
+$x+y\notin B_f$. Since $|x-(x+y)|=|y|<\rho$, the estimate
+\eqref{eq:ae-control} gives
+\begin{equation}\label{eq:regular-pointwise}
+    |f(x+y)-f(x)|<\eta
+    \qquad (x\in R(f,y)).
 \end{equation}
 
-\medskip
-\noindent\textbf{Splitting the integral.}
-Using \eqref{eq:localized}, split
+Using \eqref{eq:localization}, we split
 \[
-    I(f,y)=I_{\mathrm{good}}+I_{\mathrm{bad}},
+    I(f,y)=I_{\mathrm{reg}}(f,y)+I_{\mathrm{exc}}(f,y),
 \]
 where
 \[
-    I_{\mathrm{good}}:=
-    \int_{G(f,y)}
+    I_{\mathrm{reg}}(f,y):=
+    \int_{R(f,y)}
     \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx
 \]
 and
 \[
-    I_{\mathrm{bad}}:=
-    \int_{(E\cup(E-y))\cap\operatorname{Bad}(f,y)}
-    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx.
+    I_{\mathrm{exc}}(f,y):=
+    \int_{(E\cup(E-y))\cap X(f,y)}
+    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx .
 \]
-On the good region, \eqref{eq:pointwise} and $\min(a,1)\le a$ imply
+On the regular region, \eqref{eq:regular-pointwise} and the inequality
+$\min(a,1)\le a$ for $a\ge 0$ imply
 \[
 \begin{aligned}
-    I_{\mathrm{good}}
-    &\le \varepsilon\,m(G(f,y)) \\
-    &\le \varepsilon\,m(E\cup(E-y)) \\
-    &\le 2\varepsilon\,m(E) \\
-    &\le \frac{\varepsilon^{*}}{4},
+    I_{\mathrm{reg}}(f,y)
+    &\le \eta\,m(R(f,y)) \\
+    &\le \eta\,m(E\cup(E-y)) \\
+    &\le 2\eta\,m(E) \\
+    &= \frac{\eps^{*}}{4},
 \end{aligned}
 \]
-where the last inequality follows from \eqref{eq:choice-eps}. On the bad
-region, the truncation gives $\min(a,1)\le 1$, and hence
+where the last equality follows from \eqref{eq:eta-gamma-choice}. On the
+exceptional region, the integrand is bounded by $1$, and therefore
 \[
 \begin{aligned}
-    I_{\mathrm{bad}}
-    &\le m\bigl((E\cup(E-y))\cap\operatorname{Bad}(f,y)\bigr) \\
-    &\le m(\operatorname{Bad}(f,y)) \\
-    &<2\varepsilon \\
-    &\le \frac{\varepsilon^{*}}{4}.
+    I_{\mathrm{exc}}(f,y)
+    &\le m\bigl((E\cup(E-y))\cap X(f,y)\bigr) \\
+    &\le m(X(f,y)) \\
+    &<2\gamma \\
+    &= \frac{\eps^{*}}{4}.
 \end{aligned}
 \]
 Thus
 \[
-    I(f,y)<\frac{\varepsilon^{*}}{2}
+    I(f,y)<\frac{\eps^{*}}{2}
 \]
-for every $f\in\mathcal{F}$ and every $|y|<r$. Taking the supremum over
-$f\in\mathcal{F}$ gives
+for every $f\in\F$ and every $|y|<r$. Taking the supremum over
+$f\in\F$ yields
 \[
-    \sup_{f\in\mathcal{F}} I(f,y)
-    \le \frac{\varepsilon^{*}}{2}
-    <\varepsilon^{*}
+    \sup_{f\in\F}I(f,y)
+    \le \frac{\eps^{*}}{2}
+    <\eps^{*}
     \qquad (|y|<r).
 \]
-Since $\varepsilon^{*}>0$ was arbitrary, the desired limit follows.
+Since $\eps^{*}>0$ was arbitrary, the truncated translation condition follows.
+\end{proof}
+
+\begin{corollary}\label{cor:p-version}
+Let $1\le p<\infty$. Under the assumptions of Theorem~\ref{thm:main},
+\[
+    \lim_{|y|\to 0}\sup_{f\in\F}
+    \int_{\R^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)^p\,dx=0.
+\]
+\end{corollary}
+
+\begin{proof}
+For $a\ge 0$ and $1\le p<\infty$,
+\[
+    \min(a,1)^p\le \min(a,1).
+\]
+The conclusion follows immediately from Theorem~\ref{thm:main}.
 \end{proof}
 
 \section{Remarks}
 
 \begin{remark}
-The proof uses only the standard one-parameter definition of almost
-equicontinuity. The choice
-\[
-    \varepsilon =
-    \min\left\{\frac{\varepsilon^{*}}{8m(E)},\frac{\varepsilon^{*}}{8}\right\}
-\]
-is simply a bookkeeping device: the same small parameter controls both the
-measure of the exceptional set and the oscillation on its complement.
+The proof uses the two-tolerance formulation from
+Remark~\ref{rem:two-params}. This does not introduce a stronger hypothesis:
+it is only a convenient way to assign separate roles to the two small
+quantities. The parameter $\eta$ controls the oscillation on the regular
+region, while $\gamma$ controls the measure of the exceptional region.
 \end{remark}
 
 \begin{remark}
-The truncation $\min(\cdot,1)$ is essential for this argument. On the bad
-region we do not assume uniform boundedness or an $L^p$ bound on
-$\mathcal{F}$; the estimate is possible because the integrand is bounded by
-$1$.
+The truncation $\min(\cdot,1)$ is essential in the exceptional-region estimate.
+No uniform pointwise bound or $L^p$ bound on the family is assumed there; the
+estimate uses only that the truncated integrand is bounded above by $1$.
 \end{remark}
 
 \begin{remark}
-The assumption $m(E)<\infty$ is used to control the good-region contribution:
+The finite-measure support assumption is used precisely in
+\eqref{eq:support-size}. It ensures that the regular-region contribution is
+bounded by
 \[
-    I_{\mathrm{good}}\le
-    \varepsilon\,m(E\cup(E-y))\le 2\varepsilon\,m(E).
+    I_{\mathrm{reg}}(f,y)
+    \le \eta\,m(E\cup(E-y))
+    \le 2\eta\,m(E).
 \]
-Without finite-measure support, this estimate gives no useful bound.
+Without such a finite-measure localization, the regular-region estimate need
+not be useful.
 \end{remark}
 
 \end{document}
