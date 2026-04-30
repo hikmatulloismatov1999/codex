@@ -11,6 +11,7 @@
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
 \newtheorem{corollary}{Corollary}
 
 \theoremstyle{definition}
@@ -34,10 +35,10 @@
 \begin{abstract}
 We prove that a family of measurable functions supported in a fixed
 finite-measure set satisfies the truncated translation condition whenever it is
-almost equicontinuous. The proof is elementary and separates the estimate into
-two parts: a regular region, where almost equicontinuity gives pointwise
-control, and an exceptional region, whose contribution is controlled by the
-truncation.
+almost equicontinuous. The proof separates the estimate into three
+contributions: a symmetric-difference part controlled by translation
+continuity of finite-measure sets, a regular part controlled by almost
+equicontinuity, and an exceptional part controlled by the truncation.
 \end{abstract}
 
 \section{Introduction}
@@ -67,6 +68,12 @@ $y\in\R^n$, we write
 \]
 By translation invariance of Lebesgue measure, $A-y$ is measurable and
 $m(A-y)=m(A)$.
+
+We also write
+\[
+    A\triangle B := (A\setminus B)\cup(B\setminus A)
+\]
+for the symmetric difference of two sets.
 
 \begin{definition}[Almost equicontinuity]\label{def:ae}
 Let $\F$ be a family of real-valued measurable functions on $\R^n$. We say
@@ -128,6 +135,25 @@ Definition~\ref{def:translation}; that is,
 \]
 \end{theorem}
 
+\begin{lemma}\label{lem:symdiff}
+If $E\subset\R^n$ is measurable and $m(E)<\infty$, then
+\[
+    \lim_{|y|\to 0} m\bigl(E\triangle(E-y)\bigr)=0.
+\]
+\end{lemma}
+
+\begin{proof}
+Since $m(E)<\infty$, the indicator function $\mathbf{1}_E$ belongs to
+$L^1(\R^n)$. By the continuity of translations in $L^1$,
+\[
+    \int_{\R^n}\bigl|\mathbf{1}_E(x+y)-\mathbf{1}_E(x)\bigr|\,dx
+    \longrightarrow 0
+    \qquad (y\to 0).
+\]
+The integrand is the indicator of $E\triangle(E-y)$, so the integral is exactly
+$m(E\triangle(E-y))$.
+\end{proof}
+
 \section{Proof}
 
 \begin{proof}
@@ -151,9 +177,15 @@ Let $\alpha>0$ be given. Choose
 \begin{equation}\label{eq:epsilon-choice}
     \eps:=
     \min\left\{
-        \frac{\alpha}{4m(E)},
-        \frac{\alpha}{4}
+        \frac{\alpha}{3m(E)},
+        \frac{\alpha}{6}
     \right\}.
+\end{equation}
+By Lemma~\ref{lem:symdiff}, there exists $r_0>0$ such that
+\begin{equation}\label{eq:symdiff-small}
+    |y|<r_0
+    \quad\Longrightarrow\quad
+    m\bigl(E\triangle(E-y)\bigr)<\frac{\alpha}{3}.
 \end{equation}
 By Definition~\ref{def:ae}, there exists $\delta>0$ such that for every
 $f\in\F$ there is a measurable set $B_f\subset\R^n$ with
@@ -166,7 +198,7 @@ and
     \quad\Longrightarrow\quad
     |f(x_1)-f(x_2)|<\eps .
 \end{equation}
-Set $r:=\delta$. We will show that
+Set $r:=\min\{r_0,\delta\}$. We will show that
 \[
     \sup_{f\in\F}I(f,y)\le \alpha
     \qquad\text{whenever } |y|<r.
@@ -182,18 +214,22 @@ $E\cup(E-y)$, and so
     \int_{E\cup(E-y)}
     \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx .
 \end{equation}
-Moreover,
-\begin{equation}\label{eq:support-size}
-    m(E\cup(E-y))\le m(E)+m(E-y)=2m(E).
+We now split the localized integral into the symmetric-difference part and the
+intersection part. The symmetric-difference contribution is small by
+\eqref{eq:symdiff-small}, since the integrand is bounded by $1$:
+\begin{equation}\label{eq:symdiff-part}
+    \int_{E\triangle(E-y)}
+    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx
+    <\frac{\alpha}{3}.
 \end{equation}
 
 Define the exceptional region associated with $f$ and $y$ by
 \[
     X(f,y):=B_f\cup(B_f-y),
 \]
-and define the regular region by
+and define the regular part of the intersection by
 \[
-    R(f,y):=(E\cup(E-y))\setminus X(f,y).
+    R(f,y):=(E\cap(E-y))\setminus X(f,y).
 \]
 By \eqref{eq:exceptional-size} and translation invariance,
 \begin{equation}\label{eq:X-size}
@@ -210,9 +246,12 @@ $|x-(x+y)|=|y|<\delta$, the estimate \eqref{eq:ae-control} gives
     \qquad (x\in R(f,y)).
 \end{equation}
 
-Using \eqref{eq:localization}, we split
+On the intersection $E\cap(E-y)$, we split
 \[
-    I(f,y)=I_{\mathrm{reg}}(f,y)+I_{\mathrm{exc}}(f,y),
+    \int_{E\cap(E-y)}
+    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx
+    =
+    I_{\mathrm{reg}}(f,y)+I_{\mathrm{exc}}(f,y),
 \]
 where
 \[
@@ -223,7 +262,7 @@ where
 and
 \[
     I_{\mathrm{exc}}(f,y):=
-    \int_{(E\cup(E-y))\cap X(f,y)}
+    \int_{(E\cap(E-y))\cap X(f,y)}
     \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx .
 \]
 On the regular region, \eqref{eq:regular-pointwise} and the inequality
@@ -231,19 +270,21 @@ $\min(a,1)\le a$ for $a\ge 0$ imply
 \[
     I_{\mathrm{reg}}(f,y)
     \le \eps\,m(R(f,y))
-    \le 2\eps\,m(E)
-    \le \frac{\alpha}{2},
+    \le \eps\,m(E)
+    \le \frac{\alpha}{3},
 \]
-where we used \eqref{eq:support-size} and \eqref{eq:epsilon-choice}. On the
+where we used $R(f,y)\subset E$ and \eqref{eq:epsilon-choice}. On the
 exceptional region, the integrand is bounded by $1$, and \eqref{eq:X-size}
 gives
 \[
     I_{\mathrm{exc}}(f,y)
     \le m(X(f,y))
     <2\eps
-    \le \frac{\alpha}{2}.
+    \le \frac{\alpha}{3}.
 \]
-It follows that $I(f,y)<\alpha$ for every $f\in\F$ and every $|y|<r$.
+Combining these two bounds with \eqref{eq:localization} and
+\eqref{eq:symdiff-part}, we obtain $I(f,y)<\alpha$ for every $f\in\F$ and
+every $|y|<r$.
 Taking the supremum over $f\in\F$ yields
 \[
     \sup_{f\in\F}I(f,y)
@@ -292,12 +333,12 @@ estimate uses only that the truncated integrand is bounded above by $1$.
 
 \begin{remark}
 The finite-measure support assumption is used precisely in
-\eqref{eq:support-size}. It ensures that the regular-region contribution is
-bounded by
+\eqref{eq:symdiff-small} and in the estimate of the regular-region
+contribution. The first use makes the symmetric-difference part vanish as
+$y\to0$; the second gives
 \[
     I_{\mathrm{reg}}(f,y)
-    \le \eps\,m(E\cup(E-y))
-    \le 2\eps\,m(E).
+    \le \eps\,m(E).
 \]
 Without such a finite-measure localization, the regular-region estimate need
 not be useful.
