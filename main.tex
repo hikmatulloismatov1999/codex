@@ -16,6 +16,7 @@
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
 
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}
@@ -36,7 +37,9 @@
 \begin{abstract}
 We prove that a family of measurable functions supported in a fixed
 finite-measure set satisfies the truncated translation condition whenever it is
-almost equicontinuous. The proof separates the estimate into three
+almost equicontinuous. We also show by a bounded smooth example on $\R$ that
+the finite-measure support hypothesis cannot simply be removed. The proof
+separates the estimate into three
 contributions: a symmetric-difference part controlled by translation
 continuity of finite-measure sets, a regular part controlled by almost
 equicontinuity, and an exceptional part controlled by the truncation.
@@ -58,6 +61,10 @@ circle of ideas. We show that almost equicontinuity, together with support in a
 fixed set of finite measure, implies the truncated translation condition. The
 proof is included in detail because the truncation and the finite-measure
 support assumption play distinct roles.
+
+We conclude with a simple example showing that the finite-measure assumption
+is essential for this implication, even for a family consisting of one bounded
+smooth function.
 
 \section{Definitions and statement}
 
@@ -258,6 +265,73 @@ This estimate is uniform in $f\in\F$, and therefore
     \qquad (|y|<r).
 \]
 Since $\widetilde\eps>0$ was arbitrary, the desired limit follows.
+\end{proof}
+
+\section{Necessity of the finite-measure hypothesis}
+
+\begin{example}\label{ex:sin}
+Let $E=\R$, and let $\F=\{f\}$, where
+\[
+    f(x):=\sin x .
+\]
+Since $E=\R$, the zero extension outside $E$ is simply the function itself.
+The family $\F$ is almost equicontinuous, but it does not satisfy the
+truncated translation condition in Theorem~\ref{thm:main}.
+\end{example}
+
+\begin{proof}
+We first verify almost equicontinuity. The function $f$ is globally
+Lipschitz, because
+\[
+    |\sin x-\sin z|\le |x-z|
+    \qquad (x,z\in\R).
+\]
+Given $\eps>0$, choose $\delta=\eps$ and take the exceptional set
+$B_f=\varnothing$. If $x,z\in\R$ and $|x-z|<\delta$, then
+$|f(x)-f(z)|<\eps$. Thus Definition~\ref{def:ae} is satisfied with no
+exceptional set, and the singleton family $\F$ is almost equicontinuous.
+
+We now show that the truncated translation integral is infinite for every
+small nonzero translation. Fix $y$ with $0<|y|<\pi/3$, and set
+\[
+    a_y:=2\left|\sin\frac{y}{2}\right|.
+\]
+Then $0<a_y<1$. The trigonometric identity
+\[
+    |\sin(x+y)-\sin x|
+    =
+    a_y\left|\cos\left(x+\frac{y}{2}\right)\right|
+\]
+therefore gives, for every $x\in\R$,
+\[
+    \min\bigl(|\sin(x+y)-\sin x|,1\bigr)
+    =
+    a_y\left|\cos\left(x+\frac{y}{2}\right)\right|,
+\]
+because the right-hand side is bounded above by $a_y<1$.
+
+For $N\in\mathbb N$, integrate over the disjoint intervals
+\[
+    J_k:=\left[2\pi k-\frac{y}{2},\,2\pi(k+1)-\frac{y}{2}\right],
+    \qquad k=0,\dots,N-1.
+\]
+Using the change of variables $u=x+y/2$, we obtain
+\[
+    \int_{\bigcup_{k=0}^{N-1}J_k}
+    \min\bigl(|\sin(x+y)-\sin x|,1\bigr)\,dx
+    =
+    a_y\sum_{k=0}^{N-1}
+    \int_{2\pi k}^{2\pi(k+1)}|\cos u|\,du .
+\]
+Since $\int_0^{2\pi}|\cos u|\,du=4$, the last expression equals
+$4Na_y$. Letting $N\to\infty$ yields
+\[
+    \int_{\R}\min\bigl(|\sin(x+y)-\sin x|,1\bigr)\,dx=\infty
+    \qquad (0<|y|<\pi/3).
+\]
+Since $\F$ contains only $f$, the supremum over $\F$ is the same infinite
+quantity. Hence the limit in Theorem~\ref{thm:main} cannot hold when the
+finite-measure support hypothesis is removed.
 \end{proof}
 
 \section{Remarks}
