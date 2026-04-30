@@ -430,18 +430,21 @@ $\R^n$ into three regions:
     \R^n\setminus\bigl(B_R\cup(B_R-y)\bigr).
 \]
 The boundary region is controlled directly by
-\eqref{eq:ball-symdiff-small}, since the integrand is bounded by $1$.
+equation~\eqref{eq:ball-symdiff-small}, since the integrand is bounded by
+$1$.
 
 On the interior region $B_R\cap(B_R-y)$, put
 \[
     \widetilde B:=B_f\cup(B_f-y).
 \]
-By \eqref{eq:tail-exceptional-small} and translation invariance,
+The exceptional-set estimate in equation~\eqref{eq:tail-exceptional-small},
+together with translation invariance, gives
 \[
     \meas{\widetilde B}<2\eps .
 \]
 On $(B_R\cap(B_R-y))\setminus\widetilde B$, both $x$ and $x+y$ lie outside
-$B_f$, and therefore \eqref{eq:tail-ae-control} gives
+$B_f$. Hence the almost-equicontinuity estimate in
+equation~\eqref{eq:tail-ae-control} gives
 $|f(x+y)-f(x)|<\eps$. Hence
 \begin{equation}\label{eq:tail-interior}
     \int_{B_R\cap(B_R-y)}
@@ -459,10 +462,12 @@ $x\in T_R(f)$ or $x+y\in T_R(f)$. Consequently,
     \le \meas{T_R(f)}+\meas{T_R(f)-y}
     <\frac{\widetilde\eps}{4},
 \end{equation}
-where we used \eqref{eq:tail-small} and translation invariance.
+where the last inequality uses equation~\eqref{eq:tail-small} and
+translation invariance.
 
-Combining \eqref{eq:ball-symdiff-small}, \eqref{eq:tail-interior}, and
-\eqref{eq:tail-exterior}, we obtain
+The boundary, interior, and exterior estimates in
+equations~\eqref{eq:ball-symdiff-small}, \eqref{eq:tail-interior},
+and~\eqref{eq:tail-exterior} therefore give
 \[
     \int_{\R^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx
     <\widetilde\eps .
@@ -725,9 +730,9 @@ $a=\eps/2$, we have
     |f_s(x)-f_s(z)|\ge\eps/2\}}
     \ge \frac{\beta_Q^2}{2}.
 \]
-Using the Cauchy--Schwarz inequality, the counting bound for cubes meeting $K$, and
-\eqref{eq:beta-sum}, we obtain a constant $c_1>0$, independent of $s$, such
-that
+Using the Cauchy--Schwarz inequality, the counting bound for cubes meeting
+$K$, and equation~\eqref{eq:beta-sum}, we obtain a constant $c_1>0$,
+independent of $s$, such that
 \begin{equation}\label{eq:bad-pairs}
     \sum_{i=1}^{3^n}\sum_{Q\in\mathcal G_i}
     \meas{\{(x,z)\in(K\cap Q)^2:
@@ -740,7 +745,7 @@ at most $\sqrt n\,s$. Conversely, a fixed pair of points can belong to
 $(K\cap Q)^2$ for only boundedly many cubes $Q$ among all the shifted grids;
 the bound depends only on $n$. Thus, after absorbing this bounded overlap
 into the constant, writing $z=x+y$, and using Fubini's theorem,
-\eqref{eq:bad-pairs} implies
+the bad-pair estimate in equation~\eqref{eq:bad-pairs} implies
 \[
     \int_{|y|\le\sqrt n\,s}
     \meas{\{x\in E\cap(E-y):
@@ -758,7 +763,8 @@ for a constant $c_3>0$ independent of $s$.
 
 Letting $s\downarrow0$, we have $y_s\to0$. By
 Lemma~\ref{lem:bad-measure-from-translation}, the lower bound in
-\eqref{eq:bad-translation} contradicts the assumed translation condition.
+equation~\eqref{eq:bad-translation} contradicts the assumed translation
+condition.
 Therefore $\F$ must be almost equicontinuous on $E$.
 \end{proof}
 
