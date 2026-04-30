@@ -13,7 +13,6 @@
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
-\newtheorem{corollary}{Corollary}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
@@ -24,6 +23,7 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\F}{\mathcal{F}}
 \newcommand{\eps}{\varepsilon}
+\newcommand{\meas}[1]{\lvert #1\rvert}
 
 \title{Almost Equicontinuity Implies the Translation Condition}
 \author{Hikmatullo Ismatov}
@@ -55,22 +55,20 @@ in~\cite{AlvesOniani}.
 
 The purpose of this note is to isolate one elementary implication used in this
 circle of ideas. We show that almost equicontinuity, together with support in a
-fixed set of finite measure, implies the truncated translation condition of
-Definition~\ref{def:translation}. The proof is included in detail because the
-truncation and the finite-measure support assumption play distinct roles.
+fixed set of finite measure, implies the truncated translation condition. The
+proof is included in detail because the truncation and the finite-measure
+support assumption play distinct roles.
 
 \section{Definitions and statement}
 
-Throughout, $m$ denotes Lebesgue measure on $\R^n$, and all functions are
-Lebesgue measurable. For a measurable set $A\subset\R^n$ and
-$y\in\R^n$, we write
+Throughout, $\meas{A}$ denotes the Lebesgue measure of a measurable set
+$A\subset\R^n$, and all functions are Lebesgue measurable. For
+$A\subset\R^n$ and $y\in\R^n$, we write
 \[
     A-y:=\{x\in\R^n:x+y\in A\}.
 \]
 By translation invariance of Lebesgue measure, $A-y$ is measurable and
-$m(A-y)=m(A)$.
-
-We also write
+$\meas{A-y}=\meas{A}$. We also write
 \[
     A\triangle B := (A\setminus B)\cup(B\setminus A)
 \]
@@ -82,7 +80,7 @@ that $\F$ is \emph{almost equicontinuous} if for every $\eps>0$ there exists
 $\delta>0$ such that, for every $f\in\F$, there is a measurable set
 $B_f\subset\R^n$ satisfying
 \[
-    m(B_f)<\eps,
+    \meas{B_f}<\eps,
 \]
 and such that
 \[
@@ -92,45 +90,15 @@ and such that
 \]
 \end{definition}
 
-\begin{definition}[Truncated translation condition]\label{def:translation}
-Let $\F$ be a family of measurable functions on $\R^n$. We say that $\F$
-satisfies the \emph{truncated translation condition} if
-\[
-    \lim_{|y|\to 0}\sup_{f\in\F}
-    \int_{\R^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0.
-\]
-\end{definition}
-
-\begin{remark}[Equivalent two-tolerance formulation]\label{rem:two-params}
-Definition~\ref{def:ae} is equivalent to the following two-tolerance
-formulation: for every $\eta>0$ and every $\gamma>0$, there exists $\rho>0$
-such that, for every $f\in\F$, there is a measurable set $B_f\subset\R^n$
-with $m(B_f)<\gamma$ and
-\[
-    x_1,x_2\in\R^n\setminus B_f,\quad |x_1-x_2|<\rho
-    \quad\Longrightarrow\quad
-    |f(x_1)-f(x_2)|<\eta .
-\]
-Indeed, Definition~\ref{def:ae} implies this statement by applying it with
-$\eps=\min\{\eta,\gamma\}$. The resulting exceptional set satisfies
-$m(B_f)<\eps\le\gamma$, and the oscillation is bounded by
-$\eps\le\eta$. Conversely, taking $\eta=\gamma=\eps$ gives
-Definition~\ref{def:ae}.
-
-Although this equivalent form is sometimes convenient, the proof of
-Theorem~\ref{thm:main} below uses Definition~\ref{def:ae} directly.
-\end{remark}
-
 \begin{theorem}\label{thm:main}
-Let $E\subset\R^n$ be measurable with $m(E)<\infty$, and let $\F$ be a family
-of real-valued measurable functions on $\R^n$. Assume that:
+Let $E\subset\R^n$ be measurable with $\meas{E}<\infty$, and let $\F$ be a
+family of real-valued measurable functions on $\R^n$. Assume that:
 \begin{enumerate}[label=\textup{(H\arabic*)},ref=\textup{(H\arabic*)}]
     \item\label{hyp:support} $f(x)=0$ for every $x\notin E$ and every
     $f\in\F$;
     \item\label{hyp:ae} $\F$ is almost equicontinuous.
 \end{enumerate}
-Then $\F$ satisfies the truncated translation condition in the sense of
-Definition~\ref{def:translation}; that is,
+Then
 \[
     \lim_{|y|\to 0}\sup_{f\in\F}
     \int_{\R^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0.
@@ -138,63 +106,62 @@ Definition~\ref{def:translation}; that is,
 \end{theorem}
 
 \begin{lemma}\label{lem:symdiff}
-If $E\subset\R^n$ is measurable and $m(E)<\infty$, then
+If $E\subset\R^n$ is measurable and $\meas{E}<\infty$, then
 \[
-    \lim_{|y|\to 0} m\bigl(E\triangle(E-y)\bigr)=0.
+    \lim_{|y|\to 0}\meas{E\triangle(E-y)}=0.
 \]
 \end{lemma}
 
 \begin{proof}
-Since $m(E)<\infty$, the indicator function $\mathbf{1}_E$ belongs to
+Since $\meas{E}<\infty$, the indicator function $\mathbf{1}_E$ belongs to
 $L^1(\R^n)$. By the continuity of translations in $L^1$,
 \[
     \int_{\R^n}\bigl|\mathbf{1}_E(x+y)-\mathbf{1}_E(x)\bigr|\,dx
     \longrightarrow 0
     \qquad (y\to 0).
 \]
-The integrand is the indicator of $E\triangle(E-y)$, so the integral is exactly
-$m(E\triangle(E-y))$.
+The integrand is the indicator of $E\triangle(E-y)$, and hence the integral is
+$\meas{E\triangle(E-y)}$.
 \end{proof}
 
 \section{Proof}
 
 \begin{proof}
-For $f\in\F$ and $y\in\R^n$, define
+For $f\in\F$ and $y\in\R^n$, set
 \[
     I(f,y):=
     \int_{\R^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx .
 \]
-We prove that $I(f,y)$ tends to zero as $y\to 0$, uniformly with respect to
+We prove that $I(f,y)$ tends to zero as $y\to0$, uniformly with respect to
 $f\in\F$.
 
-If $m(E)=0$, then hypothesis~\ref{hyp:support} implies that every
+If $\meas{E}=0$, then hypothesis~\ref{hyp:support} implies that every
 $f\in\F$ is zero almost everywhere. By translation invariance,
 $f(\cdot+y)$ is also zero almost everywhere for every $y\in\R^n$. Hence
-$I(f,y)=0$ for all $f\in\F$ and all $y\in\R^n$, and the conclusion is
-immediate. We therefore assume that
+$I(f,y)=0$ for all $f\in\F$ and all $y\in\R^n$. We therefore assume that
 \[
-    0<m(E)<\infty.
+    0<\meas{E}<\infty.
 \]
 
-Let $\alpha>0$ be given. Choose
+Let $\widetilde\eps>0$ be given. Choose
 \begin{equation}\label{eq:epsilon-choice}
     \eps:=
     \min\left\{
-        \frac{\alpha}{3m(E)},
-        \frac{\alpha}{6}
+        \frac{\widetilde\eps}{3\meas{E}},
+        \frac{\widetilde\eps}{6}
     \right\}.
 \end{equation}
-Lemma~\ref{lem:symdiff} gives a number $r_0>0$ such that
+Lemma~\ref{lem:symdiff} gives $r_0>0$ such that
 \begin{equation}\label{eq:symdiff-small}
     |y|<r_0
     \quad\Longrightarrow\quad
-    m\bigl(E\triangle(E-y)\bigr)<\frac{\alpha}{3}.
+    \meas{E\triangle(E-y)}<\frac{\widetilde\eps}{3}.
 \end{equation}
 By hypothesis~\ref{hyp:ae} and Definition~\ref{def:ae}, there exists
 $\delta>0$ such that for every $f\in\F$ there is a measurable set
 $B_f\subset\R^n$ with
 \begin{equation}\label{eq:exceptional-size}
-    m(B_f)<\eps
+    \meas{B_f}<\eps
 \end{equation}
 and
 \begin{equation}\label{eq:ae-control}
@@ -202,13 +169,9 @@ and
     \quad\Longrightarrow\quad
     |f(x_1)-f(x_2)|<\eps .
 \end{equation}
-Set $r:=\min\{r_0,\delta\}$. We will show that
-\[
-    \sup_{f\in\F}I(f,y)\le \alpha
-    \qquad\text{whenever } |y|<r.
-\]
+Set $r:=\min\{r_0,\delta\}$.
 
-Fix $y\in\R^n$ with $|y|<r$ and fix $f\in\F$. If
+Fix $y\in\R^n$ with $|y|<r$, and fix $f\in\F$. If
 $x\notin E\cup(E-y)$, then both $x$ and $x+y$ lie outside $E$. By
 hypothesis~\ref{hyp:support}, $f(x)=f(x+y)=0$. Therefore the integrand in
 $I(f,y)$ is supported in $E\cup(E-y)$, and so
@@ -218,138 +181,80 @@ $I(f,y)$ is supported in $E\cup(E-y)$, and so
     \int_{E\cup(E-y)}
     \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx .
 \end{equation}
-We now split the localized integral into the symmetric-difference part and the
+
+We split the localized integral into the symmetric-difference part and the
 intersection part. Since the integrand is bounded by $1$, the
 symmetric-difference estimate in equation~\eqref{eq:symdiff-small} gives
 \begin{equation}\label{eq:symdiff-part}
     \int_{E\triangle(E-y)}
     \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx
-    <\frac{\alpha}{3}.
+    <\frac{\widetilde\eps}{3}.
 \end{equation}
 
-Define the exceptional region associated with $f$ and $y$ by
+It remains to estimate the contribution over $E\cap(E-y)$. Put
 \[
-    X(f,y):=B_f\cup(B_f-y),
-\]
-and define the regular part of the intersection by
-\[
-    R(f,y):=(E\cap(E-y))\setminus X(f,y).
+    \widetilde B:=B_f\cup(B_f-y).
 \]
 The exceptional-set estimate in equation~\eqref{eq:exceptional-size}, together
 with translation invariance, gives
-\begin{equation}\label{eq:X-size}
-    m(X(f,y))
-    \le m(B_f)+m(B_f-y)
-    =2m(B_f)
+\begin{equation}\label{eq:Btilde-size}
+    \meas{\widetilde B}
+    \le \meas{B_f}+\meas{B_f-y}
+    =2\meas{B_f}
     <2\eps .
 \end{equation}
 
-If $x\in R(f,y)$, then both $x$ and $x+y$ lie outside $B_f$. Since
-$|x-(x+y)|=|y|<\delta$, the almost-equicontinuity estimate in
+On $(E\cap(E-y))\setminus\widetilde B$, both $x$ and $x+y$ lie outside
+$B_f$. Since $|x-(x+y)|=|y|<\delta$, the almost-equicontinuity estimate in
 equation~\eqref{eq:ae-control} gives
-\begin{equation}\label{eq:regular-pointwise}
-    |f(x+y)-f(x)|<\eps
-    \qquad (x\in R(f,y)).
+\[
+    |f(x+y)-f(x)|<\eps .
+\]
+Therefore
+\begin{equation}\label{eq:regular-part}
+    \int_{(E\cap(E-y))\setminus\widetilde B}
+    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx
+    \le \eps\,\meas{E}
+    \le \frac{\widetilde\eps}{3}.
+\end{equation}
+On the exceptional part, the integrand is bounded by $1$, and the estimate in
+equation~\eqref{eq:Btilde-size} gives
+\begin{equation}\label{eq:exceptional-part}
+    \int_{(E\cap(E-y))\cap\widetilde B}
+    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx
+    \le \meas{\widetilde B}
+    <2\eps
+    \le \frac{\widetilde\eps}{3}.
 \end{equation}
 
-On the intersection $E\cap(E-y)$, we split
+Combining the localization identity~\eqref{eq:localization} with the preceding
+three estimates, we obtain
 \[
-    \int_{E\cap(E-y)}
-    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx
-    =
-    I_{\mathrm{reg}}(f,y)+I_{\mathrm{exc}}(f,y),
+    I(f,y)<\widetilde\eps .
 \]
-where
+This estimate is uniform in $f\in\F$, and therefore
 \[
-    I_{\mathrm{reg}}(f,y):=
-    \int_{R(f,y)}
-    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx
-\]
-and
-\[
-    I_{\mathrm{exc}}(f,y):=
-    \int_{(E\cap(E-y))\cap X(f,y)}
-    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx .
-\]
-On the regular region, the pointwise bound in
-equation~\eqref{eq:regular-pointwise} and the inequality $\min(a,1)\le a$
-for $a\ge 0$ imply
-\[
-    I_{\mathrm{reg}}(f,y)
-    \le \eps\,m(R(f,y))
-    \le \eps\,m(E)
-    \le \frac{\alpha}{3},
-\]
-where we used $R(f,y)\subset E$ and the choice of $\eps$ in
-equation~\eqref{eq:epsilon-choice}. On the exceptional region, the integrand
-is bounded by $1$, and the estimate in equation~\eqref{eq:X-size} gives
-\[
-    I_{\mathrm{exc}}(f,y)
-    \le m(X(f,y))
-    <2\eps
-    \le \frac{\alpha}{3}.
-\]
-Combining these two bounds with the localization identity~\eqref{eq:localization}
-and the symmetric-difference estimate~\eqref{eq:symdiff-part}, we obtain
-$I(f,y)<\alpha$ for every $f\in\F$ and
-every $|y|<r$.
-Taking the supremum over $f\in\F$ yields
-\[
-    \sup_{f\in\F}I(f,y)
-    \le \alpha
+    \sup_{f\in\F}I(f,y)\le \widetilde\eps
     \qquad (|y|<r).
 \]
-Given any $\beta>0$, applying the preceding argument with
-$\alpha=\beta/2$ gives, for the corresponding $r>0$,
-\[
-    \sup_{f\in\F}I(f,y)\le \frac{\beta}{2}<\beta
-    \qquad (|y|<r).
-\]
-This is precisely the limit in Definition~\ref{def:translation}.
-\end{proof}
-
-\begin{corollary}\label{cor:p-version}
-Let $1\le p<\infty$. Under the assumptions of Theorem~\ref{thm:main},
-\[
-    \lim_{|y|\to 0}\sup_{f\in\F}
-    \int_{\R^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)^p\,dx=0.
-\]
-\end{corollary}
-
-\begin{proof}
-For $a\ge 0$ and $1\le p<\infty$,
-\[
-    \min(a,1)^p\le \min(a,1).
-\]
-The conclusion follows immediately from Theorem~\ref{thm:main}.
+Since $\widetilde\eps>0$ was arbitrary, the desired limit follows.
 \end{proof}
 
 \section{Remarks}
 
 \begin{remark}
-The proof uses Definition~\ref{def:ae} in its one-parameter form. The choice
-in equation~\eqref{eq:epsilon-choice} ensures that the same parameter $\eps$
-is small enough for both estimates: it controls the oscillation on the regular
-region and the measure of the exceptional region.
-\end{remark}
-
-\begin{remark}
-The truncation $\min(\cdot,1)$ is essential in the exceptional-region estimate.
-No uniform pointwise bound or $L^p$ bound on the family is assumed there; the
-estimate uses only that the truncated integrand is bounded above by $1$.
-\end{remark}
-
-\begin{remark}
-The finite-measure support assumption is used precisely in
-equation~\eqref{eq:symdiff-small} and in the estimate of the regular-region
-contribution. The first use makes the symmetric-difference part vanish as
-$y\to0$; the second gives
+The finite-measure support assumption is used in two places. First, it implies
+the symmetric-difference convergence in Lemma~\ref{lem:symdiff}. Second, it
+controls the regular part of the intersection by
 \[
-    I_{\mathrm{reg}}(f,y)
-    \le \eps\,m(E).
+    \eps\,\meas{E}.
 \]
-Without such a finite-measure localization, the regular-region estimate need
-not be useful.
+\end{remark}
+
+\begin{remark}
+The truncation $\min(\cdot,1)$ is used only on the symmetric-difference and
+exceptional parts. No pointwise bound or uniform $L^p$ bound on the family is
+needed for those estimates.
 \end{remark}
 
 \begin{thebibliography}{9}
