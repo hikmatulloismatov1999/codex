@@ -1,0 +1,168 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{microtype}
+\usepackage{enumitem}
+\geometry{margin=1in}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\meas}[1]{\lvert #1\rvert}
+
+\title{Meeting Summary: Almost Equicontinuity and Truncated Translation Conditions}
+\author{Hikmatullo Ismatov}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Main Question}
+
+The goal is to understand when almost equicontinuity implies the truncated
+translation condition
+\[
+    \lim_{|y|\to0}\sup_{f\in\F}
+    \int_{\R^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0,
+\]
+and conversely, when this translation condition forces almost equicontinuity.
+The truncation is important because it allows estimates on exceptional sets
+without any pointwise boundedness or uniform $L^p$ assumption.
+
+\section*{Definitions Used}
+
+A family $\F$ of real-valued measurable functions on $\R^n$ is almost
+equicontinuous if, for every $\eps>0$, there exists $\delta>0$ such that for
+each $f\in\F$ there is a measurable set $B_f\subset\R^n$ with
+$\meas{B_f}<\eps$ and
+\[
+    x,z\in\R^n\setminus B_f,\quad |x-z|<\delta
+    \quad\Longrightarrow\quad
+    |f(x)-f(z)|<\eps .
+\]
+
+The family $\F$ has uniformly tight supports if
+\[
+    \lim_{R\to\infty}\sup_{f\in\F}
+    \meas{\{x\in\R^n: |x|>R,\ f(x)\ne0\}}=0.
+\]
+
+\section*{Results Proved}
+
+\begin{enumerate}[label=\textbf{R\arabic*.},leftmargin=*]
+    \item \textbf{Finite-measure forward implication.}
+    If every $f\in\F$ is supported in a fixed measurable set
+    $E\subset\R^n$ with $\meas{E}<\infty$, and if $\F$ is almost
+    equicontinuous, then $\F$ satisfies the truncated translation condition.
+
+    \item \textbf{The finite-measure assumption is real.}
+    On $E=\R$, the singleton family $\F=\{\sin x\}$ is almost
+    equicontinuous, but for every small nonzero $y$,
+    \[
+        \int_{\R}\min\bigl(|\sin(x+y)-\sin x|,1\bigr)\,dx=\infty.
+    \]
+    Thus one cannot simply remove the finite-measure support assumption.
+
+    \item \textbf{Forward implication under uniformly tight supports.}
+    If $\F$ is almost equicontinuous and has uniformly tight supports, then
+    $\F$ satisfies the truncated translation condition on all of $\R^n$.
+
+    \item \textbf{Finite-measure converse on the domain.}
+    Let $E\subset\R^n$ have finite measure, and let the functions be defined
+    on $E$. If
+    \[
+        \lim_{|y|\to0}\sup_{f\in\F}
+        \int_{E\cap(E-y)}
+        \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0,
+    \]
+    then $\F$ is almost equicontinuous on $E$.
+
+    \item \textbf{Local zero-extension converse.}
+    If $E$ is arbitrary and the zero extensions satisfy the global truncated
+    translation condition on $\R^n$, then the restrictions of $\F$ to every
+    finite-measure set $K\subset E$ are almost equicontinuous on $K$.
+
+    \item \textbf{Equivalence under uniformly tight supports.}
+    If $\F$ has uniformly tight supports, then
+    \[
+        \F\hbox{ is almost equicontinuous}
+        \quad\Longleftrightarrow\quad
+        \F\hbox{ satisfies the truncated translation condition}.
+    \]
+\end{enumerate}
+
+\section*{Proof Ideas}
+
+\paragraph{Forward direction on finite-measure support.}
+The integral is localized to $E\cup(E-y)$. This region is split into
+\[
+    E\triangle(E-y)
+    \quad\hbox{and}\quad
+    E\cap(E-y).
+\]
+The symmetric-difference part is small because finite-measure sets are
+continuous under translation. On the intersection, remove
+$B_f\cup(B_f-y)$. Outside this exceptional set, almost equicontinuity controls
+the integrand; on the exceptional set, the truncation by $1$ controls the
+integral by its measure.
+
+\paragraph{Uniform tail version.}
+Choose a large ball so that the support outside the ball is uniformly small.
+Inside the ball, use the finite-measure argument. Outside the ball, the
+truncation and the tail-support estimate control the contribution.
+
+\paragraph{Finite-measure converse.}
+The translation condition first implies that, for every fixed threshold
+$a>0$, the bad set
+\[
+    \{x\in E\cap(E-y): |f(x+y)-f(x)|\ge a\}
+\]
+has measure tending to zero uniformly in $f$ as $y\to0$.
+
+To prove almost equicontinuity by contradiction, one assumes that no small
+exceptional set removes all nearby bad pairs. A shifted cube decomposition is
+then used. On many cubes, one must remove a positive amount of measure before
+the values of $f$ fit into an interval of length $\eps/2$. A separated-values
+lemma converts this into a lower bound on the measure of bad pairs. Finally,
+the change of variables $z=x+y$ converts bad pairs into an averaged lower
+bound over translations, contradicting the translation condition.
+
+\section*{Key Point to Explain Clearly}
+
+The most delicate step is the passage
+\[
+    \hbox{many nearby bad pairs}
+    \quad\Longrightarrow\quad
+    \hbox{one small translation with many bad points}.
+\]
+This is done by introducing
+\[
+    P_s=
+    \{(x,z)\in K\times K: |x-z|\le \sqrt n\,s,\,
+    |f_s(x)-f_s(z)|\ge\eps/2\}
+\]
+and proving $\meas{P_s}\gtrsim s^n$. Writing $z=x+y$ gives
+\[
+    \int_{|y|\le\sqrt n\,s}
+    \meas{\{x: |f_s(x+y)-f_s(x)|\ge\eps/2\}}\,dy
+    \gtrsim s^n.
+\]
+Since the ball $\{|y|\le\sqrt n\,s\}$ also has measure comparable to $s^n$,
+there is some $y_s\to0$ for which the bad set has measure bounded below by a
+positive constant. This contradicts the translation condition.
+
+\section*{Open Direction}
+
+The remaining question is to identify the weakest global hypothesis replacing
+uniformly tight supports. The local zero-extension converse shows that the
+translation condition gives almost equicontinuity on every finite-measure
+piece. What is not yet clear is whether these local exceptional sets can be
+assembled into a single global exceptional set without a tightness assumption,
+or whether there is a counterexample where oscillations escape to infinity.
+
+\end{document}
