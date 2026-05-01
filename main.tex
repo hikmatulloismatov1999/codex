@@ -42,14 +42,14 @@ We prove that a family of measurable functions supported in a fixed
 finite-measure set satisfies the truncated translation condition whenever it is
 almost equicontinuous. We also show by a bounded smooth example on $\R$ that
 the finite-measure support hypothesis cannot simply be removed, and we record
-a replacement result under a uniform tail-support condition. In the opposite
+a replacement result for families with uniformly tight supports. In the opposite
 direction, we prove that the interior truncated translation condition implies
 almost equicontinuity on finite-measure domains. The forward proof separates
 the estimate into a symmetric-difference part, a regular part, and an
 exceptional part, while the converse uses a cube decomposition and a
 bad-pair counting argument. We finally record a local consequence of the
 global zero-extension condition on arbitrary measurable domains, and then
-obtain a genuine equivalence under a uniform tail-support assumption.
+obtain a genuine equivalence under the same uniform tail assumption.
 \end{abstract}
 
 \section{Introduction}
@@ -74,14 +74,16 @@ Second, Example~\ref{ex:sin} shows that the finite-measure assumption is not
 cosmetic: even a singleton family consisting of one bounded smooth function on
 $\R$ may fail the truncated translation condition. Third,
 Theorem~\ref{thm:tail} proves that the same conclusion remains valid on
-infinite-measure domains if the supports of the family are uniformly tight in
-measure. Finally, after two examples related to the converse direction, we
+infinite-measure domains if the family has uniformly tight supports in the
+sense of Definition~\ref{def:tight-supports}. Finally, after two examples
+related to the converse direction, we
 prove in Theorem~\ref{thm:converse} that the interior truncated translation
 condition implies almost equicontinuity on a finite-measure domain. We then
 record in Proposition~\ref{prop:local-zero-extension-converse} what the
-global zero-extension condition gives on arbitrary domains. Combined with a
-uniform tail-support hypothesis, this yields the converse theorem stated in
-Theorem~\ref{thm:tail-converse}.
+global zero-extension condition gives on arbitrary domains. Combined with
+uniformly tight supports, this yields the converse theorem stated in
+Theorem~\ref{thm:tail-converse} and the equivalence in
+Corollary~\ref{cor:tail-equivalence}.
 
 \section{Preliminaries and first theorem}
 
@@ -128,6 +130,15 @@ and such that
     x_1,x_2\in E\setminus B_f,\quad |x_1-x_2|<\delta
     \quad\Longrightarrow\quad
     |f(x_1)-f(x_2)|<\eps .
+\]
+\end{definition}
+
+\begin{definition}[Uniformly tight supports]\label{def:tight-supports}
+Let $\F$ be a family of real-valued measurable functions on $\R^n$. We say
+that $\F$ has \emph{uniformly tight supports} if
+\[
+    \lim_{R\to\infty}\sup_{f\in\F}
+    \meas{\{x\in\R^n: |x|>R,\ f(x)\ne0\}}=0.
 \]
 \end{definition}
 
@@ -368,19 +379,15 @@ quantity. Hence the limit in Theorem~\ref{thm:main} cannot hold when the
 finite-measure support hypothesis is removed.
 \end{proof}
 
-\section{A uniform tail version}
+\section{Uniformly tight supports}
 
-\begin{theorem}[uniform tail version]\label{thm:tail}
+\begin{theorem}[forward implication under uniformly tight supports]\label{thm:tail}
 Let $\F$ be a family of real-valued measurable functions on $\R^n$. Assume
 that:
 \begin{enumerate}[label=\textup{(T\arabic*)},ref=\textup{(T\arabic*)}]
     \item\label{tail:ae} $\F$ is almost equicontinuous;
-    \item\label{tail:tight} the supports of the functions in $\F$ are
-    uniformly tight in measure, in the sense that
-    \[
-        \lim_{R\to\infty}\sup_{f\in\F}
-        \meas{\{x\in\R^n: |x|>R,\ f(x)\ne0\}}=0.
-    \]
+    \item\label{tail:tight} $\F$ has uniformly tight supports in the sense
+    of Definition~\ref{def:tight-supports}.
 \end{enumerate}
 Then
 \[
@@ -823,18 +830,15 @@ Theorem~\ref{thm:converse} applies to the restrictions of the functions in
 $\F$ to $K$. Thus $\F|_K$ is almost equicontinuous on $K$.
 \end{proof}
 
-\begin{theorem}[converse under uniform tail support]\label{thm:tail-converse}
+\begin{theorem}[converse under uniformly tight supports]\label{thm:tail-converse}
 Let $\F$ be a family of real-valued measurable functions on $\R^n$. Assume
 that
 \[
     \lim_{|y|\to0}\sup_{f\in\F}
     \int_{\R^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0,
 \]
-and that the supports of the functions in $\F$ are uniformly tight in measure:
-\[
-    \lim_{R\to\infty}\sup_{f\in\F}
-    \meas{\{x\in\R^n: |x|>R,\ f(x)\ne0\}}=0.
-\]
+and that $\F$ has uniformly tight supports in the sense of
+Definition~\ref{def:tight-supports}.
 Then $\F$ is almost equicontinuous.
 \end{theorem}
 
@@ -892,11 +896,10 @@ $f(x)=f(z)=0$. Thus again $|f(x)-f(z)|<\eta$.
 Since $\eta>0$ was arbitrary, $\F$ is almost equicontinuous.
 \end{proof}
 
-\begin{corollary}[equivalence under uniform tail support]
+\begin{corollary}[equivalence under uniformly tight supports]
 \label{cor:tail-equivalence}
-Let $\F$ be a family of real-valued measurable functions on $\R^n$ whose
-supports are uniformly tight in measure. Then $\F$ is almost equicontinuous
-if and only if
+Let $\F$ be a family of real-valued measurable functions on $\R^n$ with
+uniformly tight supports. Then $\F$ is almost equicontinuous if and only if
 \[
     \lim_{|y|\to0}\sup_{f\in\F}
     \int_{\R^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0.
