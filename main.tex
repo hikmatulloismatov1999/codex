@@ -14,6 +14,7 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
 \newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
@@ -47,7 +48,8 @@ almost equicontinuity on finite-measure domains. The forward proof separates
 the estimate into a symmetric-difference part, a regular part, and an
 exceptional part, while the converse uses a cube decomposition and a
 bad-pair counting argument. We finally record a local consequence of the
-global zero-extension condition on arbitrary measurable domains.
+global zero-extension condition on arbitrary measurable domains, and then
+obtain a genuine equivalence under a uniform tail-support assumption.
 \end{abstract}
 
 \section{Introduction}
@@ -77,7 +79,9 @@ measure. Finally, after two examples related to the converse direction, we
 prove in Theorem~\ref{thm:converse} that the interior truncated translation
 condition implies almost equicontinuity on a finite-measure domain. We then
 record in Proposition~\ref{prop:local-zero-extension-converse} what the
-global zero-extension condition gives on arbitrary domains.
+global zero-extension condition gives on arbitrary domains. Combined with a
+uniform tail-support hypothesis, this yields the converse theorem stated in
+Theorem~\ref{thm:tail-converse}.
 
 \section{Preliminaries and first theorem}
 
@@ -819,13 +823,100 @@ Theorem~\ref{thm:converse} applies to the restrictions of the functions in
 $\F$ to $K$. Thus $\F|_K$ is almost equicontinuous on $K$.
 \end{proof}
 
+\begin{theorem}[converse under uniform tail support]\label{thm:tail-converse}
+Let $\F$ be a family of real-valued measurable functions on $\R^n$. Assume
+that
+\[
+    \lim_{|y|\to0}\sup_{f\in\F}
+    \int_{\R^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0,
+\]
+and that the supports of the functions in $\F$ are uniformly tight in measure:
+\[
+    \lim_{R\to\infty}\sup_{f\in\F}
+    \meas{\{x\in\R^n: |x|>R,\ f(x)\ne0\}}=0.
+\]
+Then $\F$ is almost equicontinuous.
+\end{theorem}
+
+\begin{proof}
+Fix $\eta>0$. By the uniform tail-support assumption, choose $R>0$ so large
+that
+\[
+    \sup_{f\in\F}\meas{T_R(f)}<\frac{\eta}{2},
+    \qquad
+    T_R(f):=\{x\in\R^n: |x|>R,\ f(x)\ne0\}.
+\]
+Let
+\[
+    K:=\{x\in\R^n: |x|\le R+1\}.
+\]
+For every $f\in\F$ and every $y\in\R^n$, the integral over $K\cap(K-y)$ is
+bounded above by the global translation integral:
+\[
+    \int_{K\cap(K-y)}
+    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx
+    \le
+    \int_{\R^n}
+    \min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx .
+\]
+The assumed global translation condition therefore implies the interior
+translation condition on the finite-measure set $K$. Applying
+Theorem~\ref{thm:converse} to the restricted family $\{f|_K:f\in\F\}$ with
+accuracy $\eta/2$, we obtain $\delta_0>0$ such that, for every $f\in\F$,
+there is a measurable set $C_f\subset K$ with
+\[
+    \meas{C_f}<\frac{\eta}{2}
+\]
+and
+\[
+    x,z\in K\setminus C_f,\quad |x-z|<\delta_0
+    \quad\Longrightarrow\quad
+    |f(x)-f(z)|<\frac{\eta}{2}.
+\]
+Set
+\[
+    B_f:=C_f\cup T_R(f),
+    \qquad
+    \delta:=\min\{\delta_0,1\}.
+\]
+Then $\meas{B_f}<\eta$. We claim that $B_f$ is an admissible exceptional set
+for the accuracy $\eta$.
+
+Indeed, let $x,z\in\R^n\setminus B_f$ satisfy $|x-z|<\delta$. If both
+points lie in $K$, then the preceding estimate gives
+$|f(x)-f(z)|<\eta/2<\eta$. If at least one of the two points lies outside
+$K$, then, since $\delta\le1$, both points lie outside the ball
+$\{w:|w|\le R\}$. Because neither point belongs to $T_R(f)$, we have
+$f(x)=f(z)=0$. Thus again $|f(x)-f(z)|<\eta$.
+
+Since $\eta>0$ was arbitrary, $\F$ is almost equicontinuous.
+\end{proof}
+
+\begin{corollary}[equivalence under uniform tail support]
+\label{cor:tail-equivalence}
+Let $\F$ be a family of real-valued measurable functions on $\R^n$ whose
+supports are uniformly tight in measure. Then $\F$ is almost equicontinuous
+if and only if
+\[
+    \lim_{|y|\to0}\sup_{f\in\F}
+    \int_{\R^n}\min\bigl(|f(x+y)-f(x)|,1\bigr)\,dx=0.
+\]
+\end{corollary}
+
+\begin{proof}
+The forward implication is Theorem~\ref{thm:tail}. The reverse implication is
+Theorem~\ref{thm:tail-converse}.
+\end{proof}
+
 \begin{problem}\label{prob:converse}
 Proposition~\ref{prop:local-zero-extension-converse} shows that the global
 zero-extension condition forces almost equicontinuity on every finite-measure
-piece of the domain. The remaining question is whether these local
-exceptional sets can be chosen in a way that yields almost equicontinuity on
-all of $E$, or whether one can construct a counterexample in which small
-oscillations are distributed over infinitely many distant pieces.
+piece of the domain, while Theorem~\ref{thm:tail-converse} shows that a
+uniform tail-support hypothesis upgrades this local information to global
+almost equicontinuity. The remaining question is to identify the weakest
+additional condition under which the unrestricted zero-extension converse
+holds, or to construct a counterexample in which small oscillations are
+distributed over infinitely many distant pieces.
 \end{problem}
 
 \section{Remarks}
@@ -847,11 +938,13 @@ needed for those estimates.
 \end{remark}
 
 \begin{remark}
-The uniform tail condition in Theorem~\ref{thm:tail} is the natural
-replacement for finite support in the infinite-measure setting. It plays the
-same structural role as tightness in the Kolmogorov--Riesz compactness
-criterion: after a large ball is chosen, the remaining mass is uniformly
-small and the finite-measure argument can be applied inside the ball.
+The uniform tail condition in Theorems~\ref{thm:tail}
+and~\ref{thm:tail-converse} is the natural replacement for finite support in
+the infinite-measure setting. It plays the same structural role as tightness
+in the Kolmogorov--Riesz compactness criterion: after a large ball is chosen,
+the remaining mass is uniformly small and the finite-measure argument can be
+applied inside the ball. Corollary~\ref{cor:tail-equivalence} summarizes the
+resulting equivalence.
 \end{remark}
 
 \begin{remark}
