@@ -738,7 +738,7 @@ of length $\eps/2$, so $|f_s(x)-f_s(z)|<\eps$, a contradiction. Thus
     \ge \frac{3\eps}{4}.
 \end{equation}
 
-By Lemma~\ref{lem:separated-values}, applied on $K\cap Q$ with
+Applying Lemma~\ref{lem:separated-values} on $K\cap Q$ with
 $a=\eps/2$, we have
 \[
     \meas{\{(x,z)\in(K\cap Q)^2:
@@ -755,21 +755,35 @@ independent of $s$, such that
     \ge c_1s^n .
 \end{equation}
 
-If two points lie in a common cube of side length $s$, then their distance is
-at most $\sqrt n\,s$. Conversely, a fixed pair of points can belong to
+Let
+\[
+    P_s:=
+    \{(x,z)\in K\times K: |x-z|\le\sqrt n\,s,\,
+    |f_s(x)-f_s(z)|\ge\eps/2\}.
+\]
+The set inside each summand in equation~\eqref{eq:bad-pairs} is contained in
+$P_s$, because two points in a common cube of side length $s$ are at distance
+at most $\sqrt n\,s$. Moreover, a fixed pair of points can belong to
 $(K\cap Q)^2$ for only boundedly many cubes $Q$ among all the shifted grids;
-the bound depends only on $n$. Thus, after absorbing this bounded overlap
-into the constant, writing $z=x+y$, and using Fubini's theorem,
-the bad-pair estimate in equation~\eqref{eq:bad-pairs} implies
+the bound depends only on $n$. Hence equation~\eqref{eq:bad-pairs} implies,
+after absorbing this bounded-overlap constant, that
+\[
+    \meas{P_s}\ge c_2s^n
+\]
+for some constant $c_2>0$ independent of $s$.
+
+Now write $z=x+y$. The map $(x,y)\mapsto(x,x+y)$ preserves Lebesgue measure
+on $\R^n\times\R^n$, and therefore the preceding lower bound gives
 \[
     \int_{|y|\le\sqrt n\,s}
-    \meas{\{x\in E\cap(E-y):
+    \meas{\{x\in K\cap(K-y):
     |f_s(x+y)-f_s(x)|\ge\eps/2\}}\,dy
     \ge c_2s^n
 \]
-for some constant $c_2>0$ independent of $s$. Since the ball
-$\{y:|y|\le\sqrt n\,s\}$ has measure comparable to $s^n$, there exists
-$y_s\in\R^n$ with $|y_s|\le\sqrt n\,s$ such that
+Since $K\subset E$, the same lower bound holds with $E\cap(E-y)$ in place
+of $K\cap(K-y)$. The ball
+$\{y:|y|\le\sqrt n\,s\}$ has measure equal to a dimensional constant times
+$s^n$, so there exists $y_s\in\R^n$ with $|y_s|\le\sqrt n\,s$ such that
 \begin{equation}\label{eq:bad-translation}
     \meas{\{x\in E\cap(E-y_s):
     |f_s(x+y_s)-f_s(x)|\ge\eps/2\}}\ge c_3
